@@ -35,6 +35,7 @@
 <html>
 <head>
 	<title>Edit Team</title>
+	<link rel="stylesheet" href="team.css">
 </head>
 <body>
 	<h2>Edit Team</h2>
