@@ -1,0 +1,141 @@
+/* Gaya umum untuk body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a; /* Latar belakang gelap */
+    color: #f0f0f0; /* Teks terang */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+/* Gaya untuk judul halaman */
+h2 {
+    color: #4CAF50;
+    margin-top: 20px;
+}
+
+/* Gaya untuk tabel (halaman Game) */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #282828;
+    color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #4CAF50;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+}
+
+td {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+/* Efek hover untuk baris tabel */
+tr:hover {
+    background-color: #3a3a3a;
+}
+
+/* Gaya untuk tombol aksi (Edit, Hapus, Tambah Game) */
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Tombol hijau */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Tombol khusus untuk "Tambah Game" */
+a button {
+    background-color: #008CBA; /* Tombol biru */
+}
+
+a button:hover {
+    background-color: #007BB5;
+}
+
+/* Gaya untuk form (halaman Edit Game dan Tambah Game) */
+form {
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    width: 50%;
+    text-align: left;
+}
+
+label {
+    font-size: 18px;
+    color: #f0f0f0; /* Teks terang */
+}
+
+input[type="text"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333; 
+    color: #f0f0f0; 
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Gaya untuk link kembali ke halaman utama */
+a {
+    text-decoration: none;
+    color: #f0f0f0;
+}
+
+a:hover {
+    color: #4CAF50;
+}
+
+/* Gaya responsif */
+@media screen and (max-width: 768px) {
+    table {
+        width: 95%;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    form {
+        width: 80%;
+    }
+}

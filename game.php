@@ -11,6 +11,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Game</title>
+	<link rel="stylesheet" href="game.css">
 </head>
 <body>
 	<h2>Game</h2>

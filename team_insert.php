@@ -22,6 +22,7 @@
 <html>
 <head>
 	<title>Tambah Team</title>
+	<link rel="stylesheet" href="team.css">
 </head>
 <body>
 	<h2>Tambah Team</h2>

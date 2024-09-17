@@ -22,6 +22,7 @@
 <html>
 <head>
 	<title>Tambah Game</title>
+	<link rel="stylesheet" href="game.css">
 </head>
 <body>
 	<h2>Tambah Game</h2>

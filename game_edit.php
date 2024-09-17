@@ -34,6 +34,7 @@
 <html>
 <head>
 	<title>Edit Game</title>
+	<link rel="stylesheet" href="game.css">
 </head>
 <body>
 	<h2>Edit Game</h2>
