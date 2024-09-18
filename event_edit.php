@@ -35,6 +35,7 @@
 <html>
 <head>
 	<title>Edit Event</title>
+	<link rel="stylesheet" href="event.css">
 </head>
 <body>
 	<h2>Edit Event</h2>

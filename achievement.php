@@ -13,6 +13,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Achievement</title>
+	<link rel="stylesheet" href="achievement.css">
 </head>
 <body>
 <b>Achievement</b>

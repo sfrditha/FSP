@@ -23,6 +23,7 @@
 <html>
 <head>
 	<title>Tambah Event</title>
+	<link rel="stylesheet" href="event.css">
 </head>
 <body>
 	<h2>Tambah Event</h2>

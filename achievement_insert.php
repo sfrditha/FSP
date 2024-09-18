@@ -45,7 +45,8 @@
 	?>
 
     <form method="post" enctype="multipart/form-data" action="">
-		<label>Nama Team</label>
+		<label>NamaTeam</label>
+		<link rel="stylesheet" href="achievement.css">
 		<?php
 			// Ambil data tim untuk dropdown
 			$sql = "SELECT * FROM team";

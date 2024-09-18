@@ -11,6 +11,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Event</title>
+	<link rel="stylesheet" href="event.css">
 </head>
 <body>
 	<h2>Event</h2>
