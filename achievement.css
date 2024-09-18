@@ -14,7 +14,7 @@ body {
 
 /* Gaya untuk dropdown Nama Team */
 select[name="team"] {
-    width: 95%;
+    width: 98%;
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;

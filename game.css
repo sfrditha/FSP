@@ -51,7 +51,7 @@ tr:hover {
     background-color: #3a3a3a;
 }
 
-/* Gaya untuk tombol aksi (Edit, Hapus, Tambah Game) */
+/* Gaya untuk tombol */
 button {
     padding: 10px 20px;
     background-color: #4CAF50; /* Tombol hijau */
@@ -59,11 +59,15 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; /* Efek transisi saat hover */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #45a049; 
+}
+
+a button:hover {
+    background-color: #007BB5; 
 }
 
 /* Tombol khusus untuk "Tambah Game" */
@@ -71,9 +75,6 @@ a button {
     background-color: #008CBA; /* Tombol biru */
 }
 
-a button:hover {
-    background-color: #007BB5;
-}
 
 /* Gaya untuk form (halaman Edit Game dan Tambah Game) */
 form {

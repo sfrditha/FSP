@@ -23,6 +23,38 @@ table {
     border-radius: 8px; /* Sudut melengkung */
 }
 
+/* Gaya untuk label "Game" */
+label[for="idgame"] {
+    font-size: 18px;
+    color: #f0f0f0; /* Teks terang untuk label */
+}
+
+/* Gaya untuk dropdown "Game" */
+select[name="idgame"] {
+    width: 70%;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333; /* Background warna gelap untuk dropdown */
+    color: #f0f0f0; /* Teks warna terang untuk kontras */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Efek hover untuk dropdown */
+select[name="idgame"]:hover {
+    background-color: #444; /* Warna lebih terang saat hover */
+}
+
+/* Gaya untuk opsi di dropdown */
+select[name="idgame"] option {
+    background-color: #333; /* Background gelap untuk opsi */
+    color: #f0f0f0; /* Teks terang untuk opsi */
+}
+
+
 th, td {
     padding: 12px;
     text-align: left;
