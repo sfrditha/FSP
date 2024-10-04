@@ -16,7 +16,7 @@
     <b>Insert New Achievement Here</b><br><br>
 
     <?php
-		$koneksi = new mysqli("localhost", "root", "", "esport");
+		$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 		if ($koneksi -> connect_errno) {
 			echo "Koneksi ke Database Failed", $koneksi -> connect_errno;

@@ -21,7 +21,7 @@ h2 {
 /* Gaya untuk tabel (halaman Game) */
 table {
     width: 80%;
-    margin: 20px auto;
+    margin: 10px auto;
     border-collapse: collapse;
     background-color: #282828;
     color: #f0f0f0;
@@ -51,6 +51,17 @@ tr:hover {
     background-color: #3a3a3a;
 }
 
+/* Gaya umum untuk semua tombol */
+button, input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Tombol hijau */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+
 /* Gaya untuk tombol */
 button {
     padding: 10px 20px;
@@ -63,18 +74,26 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; 
+    background-color: yellow; /* Tombol berwarna kuning saat hover */
+    color: black; /* Teks hitam untuk kontras saat hover */
+}
+
+/* Menghapus background shadow dari tombol "Hapus" */
+#hapus {
+    background-color: #4CAF50; /* Tombol hijau */
+    box-shadow: none; /* Hilangkan shadow */
+}
+
+/* Efek hover untuk tombol di dalam <a> */
+a button {
+    background-color: yellow; /* Semua tombol sama hijau */
+    color: black;
 }
 
 a button:hover {
-    background-color: #007BB5; 
+    background-color: #4CAF50; /* Tombol di dalam <a> juga menjadi kuning saat hover */
+    color: white; /* Teks hitam untuk kontras */
 }
-
-/* Tombol khusus untuk "Tambah Game" */
-a button {
-    background-color: #008CBA; /* Tombol biru */
-}
-
 
 /* Gaya untuk form (halaman Edit Game dan Tambah Game) */
 form {
@@ -100,20 +119,6 @@ input[type="text"] {
     border: 1px solid #ddd;
     background-color: #333; 
     color: #f0f0f0; 
-}
-
-input[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
 }
 
 /* Gaya untuk link kembali ke halaman utama */

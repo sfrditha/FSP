@@ -1,15 +1,32 @@
 /* Gaya umum untuk body */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #1a1a1a; /* Latar belakang gelap */
-    color: #f0f0f0; /* Teks terang */
+    background-color: #1a1a1a; /* Latar belakang gelap untuk nuansa gaming */
+    color: #f0f0f0; /* Teks terang untuk kontras */
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
+    align-items: center; 
+    justify-content: flex-start; /* Pusatkan konten ke atas secara vertikal */
+    min-height: 100vh; /* Pastikan konten berada di tengah secara vertikal */
+}
+
+/* Gaya untuk tabel */
+table {
+    width: 80%; /* Lebar tabel */
+    margin: 20px auto; /* Pusatkan tabel secara horizontal */
+    border-collapse: collapse;
+    background-color: #282828; /* Latar belakang tabel yang lebih gelap */
+    color: #f0f0f0; /* Teks terang untuk kontras */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 8px; /* Sudut melengkung */
+}
+
+/* Gaya untuk label "Game" */
+label[for="idgame"] {
+    font-size: 18px;
+    color: #f0f0f0; /* Teks terang untuk label */
 }
 
 /* Gaya khusus untuk input tanggal */
@@ -56,26 +73,26 @@ table {
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #4CAF50;
+    border-bottom: 1px solid #4CAF50; 
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #4CAF50; 
     color: white;
-    text-transform: uppercase;
+    text-transform: uppercase; 
 }
 
 td {
-    background-color: #333;
-    color: #f0f0f0;
+    background-color: #333; 
+    color: #f0f0f0; 
 }
 
 /* Efek hover untuk baris tabel */
 tr:hover {
-    background-color: #3a3a3a;
+    background-color: #3a3a3a; 
 }
 
-/* Gaya untuk tombol aksi (Edit, Hapus, Tambah Game) */
+/* Gaya untuk tombol */
 button {
     padding: 10px 20px;
     background-color: #4CAF50; /* Tombol hijau */
@@ -83,20 +100,29 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; /* Efek transisi saat hover */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: yellow; /* Tombol berwarna kuning saat hover */
+    color: black; /* Teks hitam untuk kontras saat hover */
 }
 
-/* Tombol khusus untuk "Tambah Game" */
+/* Menghapus background shadow dari tombol "Hapus" */
+#hapus {
+    background-color: #4CAF50; /* Tombol hijau */
+    box-shadow: none; /* Hilangkan shadow */
+}
+
+/* Efek hover untuk tombol di dalam <a> */
 a button {
-    background-color: #008CBA; /* Tombol biru */
+    background-color: yellow; /* Semua tombol sama hijau */
+    color: black;
 }
 
 a button:hover {
-    background-color: #007BB5;
+    background-color: #4CAF50; /* Tombol di dalam <a> juga menjadi kuning saat hover */
+    color: white; /* Teks hitam untuk kontras */
 }
 
 /* Gaya untuk form (halaman Edit Game dan Tambah Game) */
@@ -136,7 +162,8 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: yellow;
+    color: black;
 }
 
 /* Gaya untuk link kembali ke halaman utama */

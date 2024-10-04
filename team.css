@@ -89,15 +89,25 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; 
+    background-color: yellow; /* Tombol berwarna kuning saat hover */
+    color: black; /* Teks hitam untuk kontras saat hover */
 }
 
+/* Menghapus background shadow dari tombol "Hapus" */
+#hapus {
+    background-color: #4CAF50; /* Tombol hijau */
+    box-shadow: none; /* Hilangkan shadow */
+}
+
+/* Efek hover untuk tombol di dalam <a> */
 a button {
-    background-color: #008CBA; 
+    background-color: yellow; /* Semua tombol sama hijau */
+    color: black;
 }
 
 a button:hover {
-    background-color: #007BB5; 
+    background-color: #4CAF50; /* Tombol di dalam <a> juga menjadi kuning saat hover */
+    color: white; /* Teks hitam untuk kontras */
 }
 
 /* Gaya untuk form pada halaman Edit Team */
@@ -126,7 +136,6 @@ input[type="text"] {
     color: #f0f0f0; 
 }
 
-
 input[type="submit"] {
     padding: 10px 20px;
     background-color: #4CAF50; 
@@ -138,7 +147,8 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049; 
+    background-color: yellow; /* Tombol berwarna kuning saat hover */
+    color: black; /* Teks hitam untuk kontras */
 }
 
 /* Gaya untuk menu navigasi */
@@ -165,7 +175,7 @@ a {
 }
 
 a:hover {
-    background-color: #4CAF50; 
+    
     color: white;
 }
 
