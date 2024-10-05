@@ -1,60 +1,67 @@
 <?php
-	$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+session_start();
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
-	if ($koneksi -> connect_errno) {
-		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
-	}
+if ($koneksi->connect_errno) {
+    echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
+}
+
+// Cek role
+$isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Team</title>
-	<link rel="stylesheet" href="team.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams</title>
+    <link rel="stylesheet" href="team.css">
 </head>
 <body>
-	<h2>Team</h2>
+    <h2>Teams</h2>
+    <?php
+    $sql = "SELECT * FROM team";
+    $stmt = $koneksi->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-	<?php
-		
-		$sql = "SELECT team.idteam, game.name AS game_name, team.name AS team_name
-				FROM team
-				INNER JOIN game ON team.idgame = game.idgame";
-		$stmt = $koneksi->prepare($sql);
-		$stmt->execute();
-		$result = $stmt->get_result();
+    echo "<table border='1'>";
+    echo "<tr><th>ID Team</th><th>ID Game</th><th>Nama Team</th></tr>";
 
-		echo "<table border='1'>";
-		echo "<tr><th>IDTeam</th><th>Game</th><th>Team Name</th><th colspan='2'>Aksi</th></tr>";
+	if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+		echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+	}
 
-		while ($row = $result->fetch_assoc()) {
-			echo "<tr>";
-			echo "<td>" . $row['idteam'] . "</td>";
-			echo "<td>" . $row['game_name'] . "</td>";  
-			echo "<td>" . $row['team_name'] . "</td>";
-			echo "<td>
-					<form action='team_hapus.php' method='POST'>
-						<input type='hidden' name='idteam' value='" . $row['idteam'] . "'>
-						<input type='submit' value='Hapus'>
-					</form>
-				  </td>";
-			echo "<td>
-					<a href='team_edit.php?idteam=" . $row['idteam'] . "'>
-						<button>Edit</button>
-					</a>
-				  </td>";
-			echo "</tr>";
-		}
-		echo "</table>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>".$row['idteam']."</td>";
+        echo "<td>".$row['idgame']."</td>";
+        echo "<td>".$row['name']."</td>";
 
-		$koneksi->close();
-	?>
-	<br>
-	<a href="team_insert.php">
-		<button>Tambah Team</button>
-	</a>
-	<br><br>
-	<a href="home.php">Back To Home</a>
+        // Tombol hapus dan edit hanya ditampilkan untuk admin
+        if ($isAdmin) {
+            echo "<td>
+                    <form action='team_hapus.php' method='POST'>
+                        <input type='hidden' name='idteam' value='".$row['idteam']."'>
+                        <input type='submit' value='Hapus' class='btnHapus'>
+                    </form>
+                  </td>";
+            echo "<td>
+                    <a href='team_edit.php?idteam=".$row['idteam']."'>
+                        <button>Edit</button>
+                    </a>
+                  </td>";
+        } 
+        echo "</tr>";
+    }
+    echo "</table>";
+
+    if ($isAdmin) {
+        echo "<br><a href='team_insert.php'><button>Tambah Team</button></a>";
+    }
+
+    $koneksi->close();
+    ?>
+    <br><a href="home.php">Back To Home</a>
 </body>
 </html>
