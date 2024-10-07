@@ -1,5 +1,5 @@
 <?php
-	$koneksi = new mysqli("localhost:3306","root","","esport"); 
+	$koneksi = new mysqli("localhost:3307","root","","esport"); 
 
 	if ($koneksi -> connect_errno)
 	{
@@ -55,7 +55,7 @@
 <html>
 <head>
 	<title>Edit Achievement</title>
-	<link rel="stylesheet" href="achievement.css">
+	<link rel="stylesheet" href="achievementAddEdit.css">
 </head>
 <body>
 	<h2>Edit Achievement</h2>

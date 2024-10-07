@@ -1,0 +1,82 @@
+/* General styles for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a; /* Dark background for a gaming vibe */
+    color: #f0f0f0; /* Light text for contrast */
+    margin: 0;
+    padding: 0;
+    font-weight: bold; /* Tambahkan font-weight bold untuk seluruh body */
+    display: flex; /* Tambahkan display flex untuk body */
+    justify-content: center; /* Posisikan konten di tengah secara horizontal */
+    align-items: center; /* Posisikan konten di tengah secara vertikal */
+    height: 100vh; /* Mengatur tinggi body agar memenuhi layar */
+}
+
+/* Style for navigation menu */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; /* Ubah padding menjadi 0 */
+    text-align: center; 
+    display: flex; /* Tambahkan display flex */
+    flex-direction: column; /* Ubah menjadi kolom */
+    align-items: center; /* Posisikan di tengah */
+}
+
+li {
+    margin: 20px 0; /* Jarak antar item menu, ubah menjadi 20px untuk lebih jauh */
+}
+
+a {
+    text-decoration: none;
+    color: #f0f0f0; 
+    font-size: 30px; /* Ubah ukuran font untuk lebih besar */
+    padding: 10px 20px; 
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Tambahkan font-weight bold untuk tautan */
+}
+
+/* Hover effect for the links */
+a:hover { 
+    color: #e53935;
+    background-color: rgba(255, 255, 255, 0.1); /* Tambahkan background saat hover */
+}
+
+/* Styling for the page content */
+h1, p {
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    a {
+        display: block;
+        padding: 15px;
+    }
+}
+
+/* Assuming WELCOME! is in an h1 tag */
+h1 {
+    position: absolute;
+    top: 10px; /* Adjust this value as necessary to move it closer to the top */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 36px;
+    color: #e53935; /* White text */
+    background-color: rgba(0, 0, 0, 0.7); /* Tambahkan background semi-transparan */
+    padding: 10px 100px; /* Tambahkan padding untuk ruang di sekitar teks */
+    border-radius: 5px; /* Tambahkan sudut melengkung */
+}
+

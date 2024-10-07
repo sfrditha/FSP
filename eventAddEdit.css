@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #e53935; /* Red color for the heading */
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f0f0f0;
+}
+
+/* Gaya khusus untuk input tanggal */
+input[type="date"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333; /* Warna latar belakang gelap */
+    color: #f0f0f0; /* Teks terang */
+    font-size: 16px;
+    appearance: none; /* Menghilangkan tampilan default */
+    -webkit-appearance: none; /* Untuk browser berbasis WebKit */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Membuat ikon kalender berwarna terang di latar belakang gelap */
+}
+
+input[type="date"]:focus {
+    border-color: #e53935; /* Warna hijau ketika fokus */
+    outline: none;
+}
+
+input[type="text"], select {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border: 1px solid #e53935; /* Red border on focus */
+}
+
+input[type="submit"] {
+    background-color: #e53935; /* Red background for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: white; /* Darker red on hover */
+    color: black;
+}

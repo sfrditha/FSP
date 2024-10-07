@@ -16,7 +16,7 @@
     <b>Insert New Achievement Here</b><br><br>
 
     <?php
-		$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+		$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 		if ($koneksi -> connect_errno) {
 			echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
@@ -46,7 +46,7 @@
 
     <form method="post" enctype="multipart/form-data" action="">
 		<label>NamaTeam</label>
-		<link rel="stylesheet" href="achievement.css">
+		<link rel="stylesheet" href="achievementAddEdit.css">
 		<?php
 			// Ambil data tim untuk dropdown
 			$sql = "SELECT * FROM team";

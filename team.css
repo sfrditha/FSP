@@ -12,6 +12,12 @@ body {
     min-height: 100vh; /* Pastikan konten berada di tengah secara vertikal */
 }
 
+/* Gaya untuk judul halaman */
+h2 {
+    color: #4CAF50; 
+    margin-top: 20px;
+}
+
 /* Gaya untuk tabel */
 table {
     width: 80%; /* Lebar tabel */
@@ -54,11 +60,11 @@ select[name="idgame"] option {
     color: #f0f0f0; /* Teks terang untuk opsi */
 }
 
-
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #4CAF50; 
+    /*border-bottom: 1px solid #4CAF50;*/
+    border-style: 1px solid #4CAF50; 
 }
 
 th {

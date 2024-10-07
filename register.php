@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -45,25 +45,27 @@ $koneksi->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrasi Pengguna Baru</title>
+    <link rel="stylesheet" type="text/css" href="registerr.css">
 </head>
 <body>
-    <h2>Registrasi</h2>
+    
     <form method="POST" action="">
+    <h1>REGISTRASI</h1>
         <div>
             <label>Nama Depan:</label>
-            <input type="text" name="first_name" required>
+            <input type="text" placeholder="Nama Depan" name="first_name" required>
         </div>
         <div>
             <label>Nama Belakang:</label>
-            <input type="text" name="last_name" required>
+            <input type="text" placeholder="Nama Belakang" name="last_name" required>
         </div>
         <div>
             <label>Username:</label>
-            <input type="text" name="username" required>
+            <input type="text" placeholder="Username" name="username" required>
         </div>
         <div>
             <label>Password:</label>
-            <input type="password" name="password" required>
+            <input type="password" placeholder="Password" name="password" required>
         </div>
         <button type="submit">Daftar</button>
         <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>

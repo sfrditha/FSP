@@ -1,5 +1,5 @@
 <?php
-    $koneksi = new mysqli("localhost:3306","root","","esport"); 
+    $koneksi = new mysqli("localhost:3307","root","","esport"); 
 
 	if ($koneksi -> connect_errno)
 	{
@@ -17,7 +17,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>eSport Website</title>
-    <link rel="stylesheet" href="home.css">
+	<link rel="stylesheet" type="text/css" href="homee.css"> <!-- Link to the CSS file -->
 	<script type="text/javascript">
 		// Alert to show connection success
 		window.onload = function() {
@@ -26,11 +26,13 @@
 	</script>
 </head>
 <body>
+	
+    <h1>WELCOME!</h1> <!-- Menambahkan judul WELCOME -->
     <ul>
-        <li> <a href="team.php"> Team </a> </li>
-        <li> <a href="game.php"> Game </a> </li>
-        <li> <a href="event.php"> Event </a> </li>
-        <li> <a href="achievement.php"> Achievement </a> </li>
+        <li> <a href="team.php"> TEAM </a> </li>
+        <li> <a href="game.php"> GAME </a> </li>
+        <li> <a href="event.php"> EVENT </a> </li>
+        <li> <a href="achievement.php"> ACHIEVEMENT </a> </li>
     </ul>
 </body>
 </html>

@@ -1,13 +1,12 @@
 <?php
 session_start(); // Pastikan session dimulai
 
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
 }
 
-echo "Koneksi sukses. <br>";
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,10 +14,10 @@ echo "Koneksi sukses. <br>";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Achievement</title>
-    <link rel="stylesheet" href="achievement.css">
+    <link rel="stylesheet" href="achievementt.css">
 </head>
 <body>
-<b>Achievement</b>
+<h2>Achievement</h2>
 <?php
 
 $sql = "SELECT achievement.idachievement, team.name AS team_name, achievement.name, achievement.date, achievement.description

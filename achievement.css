@@ -84,6 +84,7 @@ input[type="date"]:focus {
 /* Gaya untuk judul halaman */
 h2 {
     color: #4CAF50;
+    font-weight: bold; /* Bold text */
     margin-top: 20px;
 }
 
@@ -102,6 +103,7 @@ th, td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #4CAF50; 
+    vertical-align: middle; /* Ensure vertical alignment */
 }
 
 th {
@@ -170,7 +172,10 @@ label {
     color: #f0f0f0; /* Teks terang */
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="date"],
+textarea[name="description"],
+select[name="team"] {
     width: 95%;
     padding: 10px;
     margin: 10px 0;
@@ -178,6 +183,10 @@ input[type="text"] {
     border: 1px solid #ddd;
     background-color: #333; 
     color: #f0f0f0; 
+    font-size: 16px;
+    appearance: none; /* Menghilangkan gaya default */
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 input[type="submit"] {

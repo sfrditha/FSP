@@ -1,5 +1,5 @@
 <?php
-	$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+	$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 	if ($koneksi -> connect_errno) {
 		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
@@ -22,10 +22,10 @@
 <html>
 <head>
 	<title>Tambah Team</title>
-	<link rel="stylesheet" href="team.css">
+	<link rel="stylesheet" href="teamAddEdit.css">
 </head>
 <body>
-	<h2>Tambah Team</h2>
+	<h2>TAMBAH TEAM</h2>
 
 	<form action="" method="POST">
 		<label for="idgame">Game:</label><br>

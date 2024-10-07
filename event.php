@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -15,10 +15,10 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
-    <link rel="stylesheet" href="event.css">
+    <link rel="stylesheet" href="eventt.css">
 </head>
 <body>
-    <h2>Events</h2>
+    <h2>EVENTS</h2>
     <?php
     $sql = "SELECT * FROM event";
     $stmt = $koneksi->prepare($sql);
@@ -26,11 +26,12 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     $result = $stmt->get_result();
 
     echo "<table border='1'>";
-    echo "<tr><th>ID Event</th><th>Nama Event</th><th>Tanggal</th><th>Deskripsi</th></tr>";
+    echo "<tr><th>ID Event</th><th>Nama Event</th><th>Tanggal</th><th>Deskripsi</th>";
+    if ($isAdmin) {
+        echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+    }
+    echo "</tr>";
 
-	if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-		echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
-	}
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>".$row['idevent']."</td>";
@@ -62,6 +63,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 
     $koneksi->close();
     ?>
+    <br>
     <br><a href="home.php">Back To Home</a>
 </body>
 </html>

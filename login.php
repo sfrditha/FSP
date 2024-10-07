@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $koneksi->prepare($query);
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $stmt->get_result();  
 
     $query = "SELECT * FROM member WHERE username = ?";
     $stmt = $koneksi->prepare($query);
@@ -74,17 +74,19 @@ $koneksi->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="stylesheet" href="loginn.css"> 
 </head>
 <body>
-    <h2>Login</h2>
+    
     <form method="POST" action="">
+        <h1>LOGIN</h1>
         <div>
             <label>Username:</label>
-            <input type="text" name="username" required>
+            <input type="text" placeholder="Username" name="username" required>
         </div>
         <div>
             <label>Password:</label>
-            <input type="password" name="password" required>
+            <input type="password" placeholder="Password" name="password" required>
         </div>
         <button type="submit">Login</button>
         <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
