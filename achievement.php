@@ -17,7 +17,7 @@ if ($koneksi->connect_errno) {
     <link rel="stylesheet" href="achievementt.css">
 </head>
 <body>
-<h2>Achievement</h2>
+<h2>ACHIEVEMENTS</h2>
 <?php
 
 $sql = "SELECT achievement.idachievement, team.name AS team_name, achievement.name, achievement.date, achievement.description
@@ -70,7 +70,7 @@ $koneksi->close();
 <br>
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
     <a href="achievement_insert.php">
-        <button>Tambah</button>
+        <button>Tambah Achievement</button>
     </a>
 <?php endif; ?>
 <br><br>

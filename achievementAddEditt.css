@@ -60,6 +60,19 @@ input[type="text"], select {
     color: #f0f0f0;
 }
 
+/* Gaya untuk textarea Deskripsi */
+textarea[name="description"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #333; /* Latar belakang gelap */
+    color: #f0f0f0; /* Teks terang */
+    font-size: 16px;
+    resize: none; /* Nonaktifkan resize */
+}
+
 input[type="text"]:focus, select:focus {
     outline: none;
     border: 1px solid #e53935; /* Red border on focus */

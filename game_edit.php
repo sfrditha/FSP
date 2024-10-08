@@ -37,7 +37,7 @@
 	<link rel="stylesheet" href="gameAddEdit.css">
 </head>
 <body>
-	<h2>Edit Game</h2>
+	<h2>EDIT GAME</h2>
 	<form action="" method="POST">
 		<input type="hidden" name="idgame" value="<?php echo $row['idgame']; ?>">
 		<label>Nama Game:</label><br>

@@ -54,8 +54,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Edit Achievement</title>
-	<link rel="stylesheet" href="achievementAddEdit.css">
+	<title>EDIT ACHIEVEMENTS</title>
+	<link rel="stylesheet" href="achievementAddEditt.css">
 </head>
 <body>
 	<h2>Edit Achievement</h2>

@@ -22,6 +22,7 @@ form {
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 0 30px red ;
     width: 500px;
+    height: 200px;
     display: flex;
     flex-direction: column;
 }
@@ -37,7 +38,7 @@ label {
 input[type="text"],
 input[type="password"] {
     width: 100%;
-    padding: 10px;
+    padding: 10px 40px 10px 10px; /* Tambahkan padding kanan untuk ikon */
     box-sizing: border-box;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -45,12 +46,14 @@ input[type="password"] {
     color: white;
     font-size: 14px;
     margin-bottom: 10px;
+    background-image: url('path/to/user-icon.png'); /* Ganti dengan path ikon pengguna */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posisi ikon pengguna */
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder {
-    color: #ccc;
-    font-size: 14px;
+input[type="password"] {
+    background-image: url('path/to/lock-icon.png'); /* Ganti dengan path ikon kunci */
+    background-position: right 10px center; /* Posisi ikon kunci */
 }
 
 button {

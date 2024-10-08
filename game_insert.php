@@ -25,7 +25,7 @@
 	<link rel="stylesheet" href="gameAddEdit.css">
 </head>
 <body>
-	<h2>Tambah Game</h2>
+	<h2>TAMBAH GAME</h2>
 	<form action="" method="POST">
 		<label>Nama Game:</label><br>
 		<input type="text" name="name"><br><br>

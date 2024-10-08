@@ -13,8 +13,7 @@
 	</style>
 </head>
 <body>
-    <b>Insert New Achievement Here</b><br><br>
-
+    <h2>INSERT ACHIEVEMENTS</h2><br><br>
     <?php
 		$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
@@ -27,12 +26,12 @@
 			$teamid = $_POST['team'];
 			$name = $_POST['name'];
 			$date = $_POST['date'];
-			$deskripsi = $_POST['deskripsi'];
+			$description = $_POST['description'];
 
 			// Prepare dan insert data ke tabel 'achievement'
 			$sql = "INSERT INTO achievement (idteam, name, date, description) VALUES (?, ?, ?, ?)";
 			$stmt = $koneksi->prepare($sql);
-			$stmt->bind_param("isss", $teamid, $name, $date, $deskripsi);
+			$stmt->bind_param("isss", $teamid, $name, $date, $description);
 
 			if ($stmt->execute()) {
 				// Jika berhasil, redirect ke halaman achievement.php
@@ -46,7 +45,7 @@
 
     <form method="post" enctype="multipart/form-data" action="">
 		<label>NamaTeam</label>
-		<link rel="stylesheet" href="achievementAddEdit.css">
+		<link rel="stylesheet" href="achievementAddEditt.css">
 		<?php
 			// Ambil data tim untuk dropdown
 			$sql = "SELECT * FROM team";
@@ -71,7 +70,7 @@
 		<input type="date" name="date" required><br><br>
 
 		<label>Deskripsi</label>
-		<textarea name="deskripsi" rows="4" cols="50" placeholder="Masukan Deskripsi" required></textarea><br><br>
+		<textarea name="description" rows="4" cols="50" placeholder="Masukan Deskripsi" required></textarea><br><br>
 
 		<input type="submit" name="submit" value="Insert Achievement"><br>
 	</form>

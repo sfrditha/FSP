@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="teamAddEdit.css">
 </head>
 <body>
-	<h2>Edit Team</h2>
+	<h2>EDIT TEAM</h2>
 
 	<form edit action="" method="POST">
 		<input type="hidden" name="idteam" value="<?php echo $row['idteam']; ?>">

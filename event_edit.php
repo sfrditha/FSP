@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="eventAddEdit.css">
 </head>
 <body>
-	<h2>Edit Event</h2>
+	<h2>EDIT EVENTS</h2>
 	<form action="" method="POST">
 		<input type="hidden" name="idevent" value="<?php echo $row['idevent']; ?>">
 		<label>Nama Event:</label><br>
