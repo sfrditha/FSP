@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -20,7 +20,24 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 <body>
     <h2>EVENTS</h2>
     <?php
-    $sql = "SELECT * FROM event";
+
+    // Tentukan jumlah data per halaman
+    $limit = 5;
+
+    // Ambil halaman saat ini dari URL, jika tidak ada halaman maka halaman 1
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $start = ($page > 1) ? ($page * $limit) - $limit : 0;
+
+    // Hitung total data
+    $result_total = $koneksi->query("SELECT COUNT(*) AS total FROM event");
+    $row_total = $result_total->fetch_assoc();
+    $total = $row_total['total'];
+
+    // Hitung jumlah halaman
+    $total_pages = ceil($total / $limit);
+
+    $sql = "SELECT * FROM event
+            LIMIT $start, $limit";
     $stmt = $koneksi->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -57,12 +74,33 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     }
     echo "</table>";
 
-    if ($isAdmin) {
-        echo "<br><a href='event_insert.php'><button>Tambah Event</button></a>";
-    }
-
     $koneksi->close();
     ?>
+    
+
+    <!-- Navigasi Halaman -->
+    <br>
+    <div>
+        <?php if ($page > 1): ?>
+            <a href="?page=<?php echo $page - 1; ?>"><--Previous</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <?php endfor; ?>
+
+        <?php if ($page < $total_pages): ?>
+            <a href="?page=<?php echo $page + 1; ?>">Next--></a>
+        <?php endif; ?>
+    </div>
+    <br>
+
+    <?php
+        if ($isAdmin) {
+            echo "<br><a href='event_insert.php'><button>Tambah Event</button></a>";
+        }
+    ?>
+
     <br>
     <br><a href="home.php">Back To Home</a>
 </body>
