@@ -23,11 +23,27 @@
 		window.onload = function() {
 			alert("Koneksi sukses.");
 		};
+
+		function toggleDropdown() {
+			var dropdown = document.getElementById("dropdown");
+			dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+		}
 	</script>
 </head>
 <body>
 	
     <h1>WELCOME!</h1> <!-- Menambahkan judul WELCOME -->
+    
+    <div style="position: absolute; top: 40px; right: 40px;">
+        <img src="user.png" alt="Profile" style="width: 40px; height: 40px;" style="cursor: pointer;" onclick="toggleDropdown()">
+        <div id="dropdown" style="display: none;">
+            <ul>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
     <ul>
         <li> <a href="team.php"> TEAM </a> </li>
         <li> <a href="game.php"> GAME </a> </li>
