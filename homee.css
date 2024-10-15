@@ -40,6 +40,29 @@ h1 {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Text shadow for contrast */
 }
 
+/* Profile container styling */
+.profile-container {
+    position: absolute; /* Positioning the profile icon absolutely */
+    top: 20px; /* Adjust top position */
+    right: 20px; /* Right position */
+    display: flex; /* Align items in a row */
+    align-items: center; /* Center items vertically */
+    z-index: 1; /* Ensure it is above other elements */
+}
+
+/* Profile icon styling */
+.profile-icon {
+    width: 40px; /* Size of the profile icon */
+    height: 40px; /* Size of the profile icon */
+    cursor: pointer; /* Change cursor on hover */
+    margin-right: 8px; /* Space between icon and dropdown indicator */
+}
+
+/* Dropdown indicator styling */
+.dropdown-indicator {
+    cursor: pointer; /* Change cursor on hover */
+}
+
 /* Card container styling */
 .card-container {
     position: relative;
@@ -72,7 +95,7 @@ h1 {
 }
 
 .card-content p {
-    color:rgb(230, 230, 143); /* Light color for text */
+    color: #f0f0f0; /* Light color for text */
     font-size: 18px; /* Font size for text */
 }
 
@@ -90,4 +113,26 @@ a {
     .card {
         width: 100%; /* Full width for cards */
     }
+}
+
+/* Dropdown styling */
+#dropdown ul {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    background-color: rgba(44, 44, 44, 0.9); /* Semi-transparent background for dropdown */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for dropdown */
+}
+
+#dropdown li {
+    padding: 10px 15px; /* Padding for list items */
+}
+
+#dropdown li a {
+    color: #f0f0f0; /* Color for links in dropdown */
+}
+
+#dropdown li:hover {
+    background-color: rgba(60, 60, 60, 0.9); /* Change background on hover */
 }
