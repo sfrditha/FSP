@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -74,7 +74,7 @@ $koneksi->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="loginn.css"> 
+    <link rel="stylesheet" href="log.css"> 
 </head>
 <body>
     
