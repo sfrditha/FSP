@@ -46,7 +46,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     echo "<tr><th>ID Team</th><th>ID Game</th><th>Nama Team</th>";
 
     if ($isAdmin) {
-        echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+        echo "<th colspan='3'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
     }
 
     echo "</tr>";
@@ -70,6 +70,12 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                         <button>Edit</button>
                     </a>
                   </td>";
+            echo "<td>
+                  <form action='team_detail.php' method='POST'>
+                      <input type='hidden' name='idteam' value='".$row['idteam']."'>
+                      <input type='submit' value='Detail' class='btnDetail'>
+                  </form>
+                </td>";
         } 
         echo "</tr>";
     }

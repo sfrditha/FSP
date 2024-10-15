@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['profile']; // Ambil role dari kolom profile
 
-        // Redirect ke halaman home.php
+        
         header("Location: home.php");
         exit();
     } else {
