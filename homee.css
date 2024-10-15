@@ -1,7 +1,7 @@
 /* General styles for the body */
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230617/pngtree-orange-and-black-gradient-background-with-3d-rendered-abstract-waves-image_3620350.jpg'); /* Background image */
+    background-image: url('background.png'); /* Updated background image */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -18,6 +18,7 @@ body {
     height: 100vh;
     text-align: center;
 }
+
 
 /* Adding a semi-transparent dark overlay */
 body::before {
