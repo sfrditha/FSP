@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -56,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Set sesi untuk username dan role
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['profile']; // Ambil role dari kolom profile
+        $_SESSION['idmember'] = $user['idmember'];
 
         
         header("Location: home.php");

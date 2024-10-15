@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -72,9 +72,9 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                   </td>";
             echo "<td>
                   <form action='team_detail.php' method='POST'>
-                      <input type='hidden' name='idteam' value='".$row['idteam']."'>
-                      <input type='submit' value='Detail' class='btnDetail'>
-                  </form>
+                        <input type='hidden' name='idteam' value='".$row['idteam']."'>
+                        <input type='submit' value='Detail' class='btnDetail'>
+                    </form>
                 </td>";
         } 
         echo "</tr>";

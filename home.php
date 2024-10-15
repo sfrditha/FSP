@@ -1,5 +1,5 @@
 <?php
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed", $koneksi->connect_errno;
@@ -19,7 +19,6 @@ $koneksi->close();
         window.onload = function() {
             alert("Koneksi sukses.");
         };
-
         function toggleDropdown() {
             var dropdown = document.getElementById("dropdown");
             dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
@@ -70,6 +69,20 @@ $koneksi->close();
                 <div class="card-content">
                     <h2>ACHIEVEMENT</h2>
                     <p>See our team achievements</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="register_team.php">
+                <div class="card-content">
+                    <h2>JOIN-PROPOSAL</h2>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="joinproposal.php">
+                <div class="card-content">
+                    <h2>JOIN-PROPOSAL(Admin)</h2>
                 </div>
             </a>
         </div>
