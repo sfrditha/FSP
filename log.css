@@ -1,30 +1,45 @@
+/* General styles for the body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
+    font-family: 'Arial', sans-serif;
+    background-image: url('bg.png'); /* Updated background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    position: relative; /* For the overlay */
+    color: #f0f0f0;
+    font-weight: bold;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    text-align: center;
 }
+
 
 h1 {
     margin-bottom: 20px;
     color: #e53935;
     text-align: center;
-    font-size: 24px;
+    font-size: 28px;
 }
 
 form {
-    background-color: #464646;
-    padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 30px red ;
+    background-color: rgba(70, 70, 70, 0.8); /* Semi-transparent background */
+    padding: 30px; /* Increased padding */
+    border: 2px solid rgba(255, 255, 255, 0.8); /* White outline */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
     width: 500px;
+    height: 250px;
     display: flex;
     flex-direction: column;
 }
+
+
 
 div {
     margin-bottom: 15px;
@@ -58,17 +73,18 @@ input[type="password"] {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #d32f2f;
+    background-color: #d32f2f; /* Button color */
     color: #fff;
     border: none;
-    border-radius: 20px; /* Rounded button */
+    border-radius: 10px; /* Rounded button */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px; /* Increased font size */
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
 button:hover {
-    background-color: white;
-    color: #1a1a1a;
+    background-color: #fff; /* Change background on hover */
+    color: #d32f2f; /* Change text color on hover */
 }
 
 p {
