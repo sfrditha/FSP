@@ -9,7 +9,29 @@ if ($koneksi->connect_errno) {
 $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 
 $selectedOption = isset($_POST['option']) ? $_POST['option'] : 'team_member'; 
-$idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0; 
+if($isAdmin){
+    $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0; 
+}
+else{
+    $idmember = isset($_SESSION['idmember']) ? $_SESSION['idmember'] : 0;
+    $sql = "select idteam from team_members
+            where idmember = ?;";
+    $stmt = $koneksi->prepare($sql);
+    $stmt->bind_param("i", $idmember);
+    if($stmt->execute()){
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();  // Fetch the row containing idteam
+        $idteam = $row['idteam'];
+    }
+    else {
+        // Handle the case where no team is found for this member
+        echo "No team found for the current member.";
+        echo '<a href="home.php">Back to Home</a>';
+       
+    }
+    
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,12 +47,12 @@ $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0;
     </script>
 </head>
 <body>
-    <h2>Edit Team</h2>
+    <h2>Team Detail</h2>
 
     <form id="teamForm" method="POST" action="team_detail.php">
         <!-- Input tersembunyi untuk idteam -->
         <input type="hidden" name="idteam" value="<?php echo $idteam; ?>">
-        <label for="option">Select View:</label>
+        <label for="option">Pilik Kategori:</label>
         <select name="option" id="option" onchange="submitForm()">
             <option value="team_member" <?php if ($selectedOption === 'team_member') echo 'selected'; ?>>Team Members</option>
             <option value="achievement" <?php if ($selectedOption === 'achievement') echo 'selected'; ?>>Achievements</option>
@@ -54,6 +76,7 @@ $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0;
         echo "<h3>Team Members</h3>";
         echo "<table border='1'>";
         echo "<tr><th>First Name</th><th>Last Name</th><th>Role</th>";
+
         if ($isAdmin) {
             echo "<th>Action</th>"; // Tampilkan aksi jika user adalah admin
         }
@@ -65,14 +88,14 @@ $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0;
             echo "<td>" . $row['lname'] . "</td>";
             echo "<td>" . $row['description'] . "</td>";
             if ($isAdmin) {
-                echo "<td><a href='edit_team_member.php?idteam=".$row['idteam']."'>Edit</a></td>";
+                echo "<td><a href='edit_team_member.php?idteam=".$row['idteam']."'>Hapus</a></td>";
             }
             echo "</tr>";
         }
         echo "</table>";
     } elseif ($selectedOption === 'achievement') {
         // Display Achievements
-        $sql = "SELECT name, date, description FROM achievement WHERE idteam = ?";
+        $sql = "SELECT * FROM achievement WHERE idteam = ?";
         $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("i", $idteam);
         $stmt->execute();
@@ -80,19 +103,39 @@ $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0;
 
         echo "<h3>Achievements</h3>";
         echo "<table border='1'>";
-        echo "<tr><th>Name</th><th>Date</th><th>Description</th></tr>";
+        echo "<tr><th>Name</th><th>Date</th><th>Description</th>";
+
+        if ($isAdmin) {
+            echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+        }
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['date'] . "</td>";
             echo "<td>" . $row['description'] . "</td>";
+            $idachievement = $row['idachievement'];
+            if ($isAdmin) {
+                echo "<td>
+                        <form action='achievement_hapus.php' method='POST'>
+                            <input type='hidden' name='idachievement' value='".$row['idachievement']."'>
+                            <input type='submit' value='Hapus' class='btnHapus'>
+                        </form>
+                      </td>";
+                
+                // Tombol edit
+                echo "<td>
+                        <a href='achievement_edit.php?idachievement=".$row['idachievement']."'>
+                            <button>Edit</button>
+                        </a>
+                      </td>";
+            }
             echo "</tr>";
         }
         echo "</table>";
     } elseif ($selectedOption === 'event') {
         // Display Events
-        $sql = "SELECT e.name, e.date, e.description 
+        $sql = "SELECT * 
                 FROM event_teams et
                 INNER JOIN event e ON et.idevent = e.idevent
                 WHERE et.idteam = ?";
@@ -103,21 +146,48 @@ $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0;
 
         echo "<h3>Events</h3>";
         echo "<table border='1'>";
-        echo "<tr><th>Name</th><th>Date</th><th>Description</th></tr>";
+        echo "<tr><th>Name</th><th>Date</th><th>Description</th>";
+
+        if ($isAdmin) {
+            echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+        }
+        echo "</tr>";
 
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['name'] . "</td>";
             echo "<td>" . $row['date'] . "</td>";
             echo "<td>" . $row['description'] . "</td>";
+            $idevent = $row['idevent'];
+
+            if ($isAdmin) {
+                echo "<td>
+                        <form action='event_hapus.php' method='POST'>
+                            <input type='hidden' name='idevent' value='".$row['idevent']."'>
+                            <input type='submit' value='Hapus' class='btnHapus'>
+                        </form>
+                      </td>";
+                echo "<td>
+                        <a href='event_edit.php?idevent=".$row['idevent']."'>
+                            <button>Edit</button>
+                        </a>
+                      </td>";
+            } 
             echo "</tr>";
         }
         echo "</table>";
+    }
+    if($isAdmin){
+        echo '<br>';
+        echo '<a href="team.php">Back to Teams</a>';
+    }
+    else{
+        echo '<br>';
+        echo'<a href="home.php">Back to Home</a>';
     }
 
     $koneksi->close();
     ?>
     <br>
-    <a href="team.php">Back to Teams</a>
 </body>
 </html>

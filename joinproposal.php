@@ -23,10 +23,10 @@ if ($isAdmin) {
     $row_total = $result_total->fetch_assoc();
     $total = $row_total['total'];
 
-    // Hitung jumlah halaman
+    
     $total_pages = ceil($total / $limit);
 
-    // SQL untuk memfilter berdasarkan status
+    
     $status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
     $sql = "SELECT jp.idjoin_proposal, jp.idteam, jp.idmember, jp.description, jp.status, t.name AS team_name, m.username AS member_name 
             FROM join_proposal jp 
@@ -46,25 +46,54 @@ if ($isAdmin) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Menangani perubahan status approve/rejected
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_POST['idjoin_proposal'])) {
-        $idproposal = intval($_POST['idjoin_proposal']);
-        $action = $_POST['action'];
+    //  approve/rejected
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_POST['idjoin_proposal'])) {
+    $idproposal = intval($_POST['idjoin_proposal']);
+    $action = $_POST['action'];
 
-        if ($action === 'approve') {
-            $update_sql = "UPDATE join_proposal SET status = 'approved' WHERE idjoin_proposal = ?";
-        } elseif ($action === 'rejected') {
-            $update_sql = "UPDATE join_proposal SET status = 'rejected' WHERE idjoin_proposal = ?";
-        }
-
+    if ($action === 'approve') {
+        // Update status menjadi 'approved'
+        $update_sql = "UPDATE join_proposal SET status = 'approved' WHERE idjoin_proposal = ?";
         $update_stmt = $koneksi->prepare($update_sql);
         $update_stmt->bind_param("i", $idproposal);
         $update_stmt->execute();
 
-        // Redirect kembali ke halaman untuk mencegah pengulangan post data
-        header("Location: joinproposal.php?status=$status_filter&page=$page");
-        exit();
+        // Ambil data idteam dan idmember dari proposal yang di-approve
+        $get_proposal_sql = "SELECT idteam, idmember FROM join_proposal WHERE idjoin_proposal = ?";
+        $get_proposal_stmt = $koneksi->prepare($get_proposal_sql);
+        $get_proposal_stmt->bind_param("i", $idproposal);
+        $get_proposal_stmt->execute();
+        $proposal_data = $get_proposal_stmt->get_result()->fetch_assoc();
+
+        $idteam = $proposal_data['idteam'];
+        $idmember = $proposal_data['idmember'];
+
+        // Periksa apakah member sudah ada di team_members
+        $check_sql = "SELECT COUNT(*) AS count FROM team_members WHERE idteam = ? AND idmember = ?";
+        $check_stmt = $koneksi->prepare($check_sql);
+        $check_stmt->bind_param("ii", $idteam, $idmember);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result()->fetch_assoc();
+
+        if ($check_result['count'] == 0) {
+            // Masukkan data ke tabel team_members jika belum ada
+            $insert_sql = "INSERT INTO team_members (idteam, idmember, description) 
+                           SELECT idteam, idmember, description FROM join_proposal WHERE idjoin_proposal = ?";
+            $insert_stmt = $koneksi->prepare($insert_sql);
+            $insert_stmt->bind_param("i", $idproposal);
+            $insert_stmt->execute();
+        }
+    } elseif ($action === 'rejected') {
+        $update_sql = "UPDATE join_proposal SET status = 'rejected' WHERE idjoin_proposal = ?";
+        $update_stmt = $koneksi->prepare($update_sql);
+        $update_stmt->bind_param("i", $idproposal);
+        $update_stmt->execute();
     }
+    // Redirect kembali ke halaman untuk mencegah pengulangan post data
+    header("Location: joinproposal.php?status=$status_filter&page=$page");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -146,8 +175,8 @@ if ($isAdmin) {
 
 <?php
 } else {
-    // Jika bukan admin, arahkan ke halaman home
-    header("Location: home.php");
+    echo "Halaman ini hanya dapat diakses oleh admin";
+    echo '<a href="home.php">Kembali ke Beranda</a>';
     exit();
 }
 

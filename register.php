@@ -13,26 +13,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
 
-    // // kalau pake Hash password 
-    // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    // Check if the username already exists
+    $check_query = "SELECT * FROM member WHERE username = ?";
+    $stmt = $koneksi->prepare($check_query);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // // Query untuk menambahkan pengguna baru ke dalam database
-    // $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
-    // $stmt = $koneksi->prepare($query);
-    // $role = 'member'; // Asumsikan role default adalah 'member'
-    // $stmt->bind_param("sssss", $username, $hashed_password, $role, $first_name, $last_name);
-
-
-    $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $koneksi->prepare($query);
-    $role = 'member'; 
-    $stmt->bind_param("sssss", $username, $password, $role, $first_name, $last_name);
-
-    if ($stmt->execute()) {
-        header("Location: login.php");
-        exit();
+    if ($result->num_rows > 0) {
+        // Username already exists
+        $error = "Username sudah terdaftar. Silakan pilih username lain.";
     } else {
-        $error = "Registrasi gagal. Coba lagi.";
+
+        // // kalau pake Hash password 
+        // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // // Query untuk menambahkan pengguna baru ke dalam database
+        // $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
+        // $stmt = $koneksi->prepare($query);
+        // $role = 'member'; // Asumsikan role default adalah 'member'
+        // $stmt->bind_param("sssss", $username, $hashed_password, $role, $first_name, $last_name);
+
+        // Proceed with registration
+        $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $koneksi->prepare($query);
+        $role = 'member'; 
+        $stmt->bind_param("sssss", $username, $password, $role, $first_name, $last_name);
+
+        if ($stmt->execute()) {
+            header("Location: login.php");
+            exit();
+        } else {
+            $error = "Registrasi gagal. Coba lagi.";
+        }
     }
 }
 
@@ -50,7 +63,7 @@ $koneksi->close();
 <body>
     
     <form method="POST" action="">
-    <h1>REGISTRASI</h1>
+        <h1>REGISTRASI</h1>
         <div>
             <label>Nama Depan:</label>
             <input type="text" placeholder="Nama Depan" name="first_name" required>

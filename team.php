@@ -8,6 +8,12 @@ if ($koneksi->connect_errno) {
 
 // Cek role
 $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+
+$isMember = isset($_SESSION['role']) && $_SESSION['role'] === 'member';
+
+if($isMember){
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

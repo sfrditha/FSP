@@ -3,36 +3,47 @@ session_start();
 $koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
-    echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
+    die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
 }
 
-// Cek apakah pengguna sudah login dan memiliki tim
-$idmember = isset($_SESSION['idmember']) ? $_SESSION['idmember'] : 0; // Mengambil idmember dari session (pengguna yang sudah login)
+
+$idmember = isset($_SESSION['idmember']) ? $_SESSION['idmember'] : 0; 
 
 if ($idmember > 0) {
-    // Mengecek apakah user sudah menjadi anggota tim
-    $checkTeam = "SELECT idteam FROM team_members WHERE idmember = ?";
-    $stmt = $koneksi->prepare($checkTeam);
+    // Mengecek apakah user sudah mengajukan bergabung ke tim
+    $checkProposal = "SELECT status FROM join_proposal WHERE idmember = ?";
+    $stmt = $koneksi->prepare($checkProposal);
     $stmt->bind_param("i", $idmember);
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
     if ($result->num_rows > 0) {
-        // Pengguna sudah memiliki tim, beri tahu dan hanya tampilkan link ke home.php
-        echo "<p>Anda sudah menjadi anggota tim.</p>";
-        echo "<a href='home.php'>Kembali ke Beranda</a>";
-        exit(); // Menghentikan eksekusi kode selanjutnya
+        $row = $result->fetch_assoc();
+        $status = $row['status'];
+        
+        // Jika status waiting, approved, atau rejected
+        if ($status === 'waiting') {
+            echo "<p>Pengajuan Anda masih dalam status <b>'waiting'</b>. Harap tunggu persetujuan.</p>";
+            echo "<a href='home.php'>Kembali ke Beranda</a>";
+            exit(); // Menghentikan eksekusi kode selanjutnya
+        } elseif ($status === 'approved') {
+            echo "<p>Pengajuan Anda telah <b>'Diterima'</b>. Anda sekarang anggota tim.</p>";
+            echo "<a href='home.php'>Kembali ke Beranda</a>";
+            exit(); 
+        } elseif ($status === 'rejected') {
+            echo "<p>Pengajuan Anda telah <b>'Ditolak'</b>. Silakan ajukan ke tim lain atau perbarui permintaan.</p>";
+        }
     }
 }
 
 // Menangani proses pendaftaran join proposal
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0; // Tim yang dipilih oleh pengguna
-    $description = isset($_POST['description']) ? $_POST['description'] : 'role preference: support, attacker, dll'; // Deskripsi default jika tidak diisi
+    $description = isset($_POST['description']) ? $_POST['description'] : 'role preference: support, attacker, dll'; // Deskripsi default
     $status = 'waiting'; // Set status menjadi 'waiting'
 
     if ($idteam > 0) {
-        // Simpan data ke join_proposal jika belum ada tim
+        // Simpan data ke join_proposal jika user belum memiliki pengajuan aktif
         $sql = "INSERT INTO join_proposal (idteam, idmember, description, status) VALUES (?, ?, ?, ?)";
         $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("iiss", $idteam, $idmember, $description, $status);
@@ -41,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: home.php");
             exit();
         } else {
-            $error = "Registrasi team gagal";
+            $error = "Registrasi tim gagal.";
         }
     } else {
         echo "Pilih tim yang ingin Anda ajukan.";
@@ -74,12 +85,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             ?>
         </select><br><br>
-        <?php
-            echo $idmember;
-        ?>
 
         <label for="description">Deskripsi :</label><br>
-        <textarea name="description" id="description" rows="4" cols="50" placeholder="Ceritakan tentang peran yang Anda inginkan, keahlian, dll."></textarea><br><br>
+        <textarea name="description" id="description" rows="4" cols="50" placeholder="Posisi yang anda inginkan"></textarea><br><br>
 
         <input type="submit" value="Ajukan Bergabung dengan Tim">
     </form>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 $koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
@@ -6,6 +7,8 @@ if ($koneksi->connect_errno) {
     exit();
 }
 
+// Check user role
+$role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 $koneksi->close();
 ?>
 <!DOCTYPE html>
@@ -41,13 +44,26 @@ $koneksi->close();
 
     <div class="card-container">
         <div class="card">
-            <a href="team.php">
+            <a href="<?php echo ($role === 'admin') ? 'team.php' : 'team_detail.php'; ?>">
                 <div class="card-content">
                     <h2>TEAM</h2>
                     <p>Meet our team members</p>
                 </div>
             </a>
         </div>
+
+        <?php if ($role === 'member'): ?>
+        <div class="card">
+            <a href="register_team.php">
+                <div class="card-content">
+                    <h2>JOIN-PROPOSAL</h2>
+                </div>
+            </a>
+        </div>
+        <?php endif; ?>
+
+        <!-- Admin-specific cards, visible to admin only -->
+        <?php if ($role === 'admin'): ?>
         <div class="card">
             <a href="game.php">
                 <div class="card-content">
@@ -86,6 +102,7 @@ $koneksi->close();
                 </div>
             </a>
         </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>
