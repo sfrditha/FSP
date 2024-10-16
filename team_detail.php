@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -39,7 +39,7 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Team</title>
-    <link rel="stylesheet" href="teamm.css">
+    <link rel="stylesheet" href="tim_detail.css">
     <script>
         function submitForm() {
             document.getElementById("teamForm").submit();

@@ -39,14 +39,13 @@ td {
 
 /* Gaya untuk tombol aksi */
 button {
-    padding: 8px 12px;
-    background-color: white; /* Red background for buttons */
-    color: black;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    border: none; /* Menghilangkan border */
+    padding: 8px 12px; /* Padding dalam tombol */
+    margin: 5px;
+    cursor: pointer; /* Mengubah kursor saat hover */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
 }
+
 
 button:hover {
     background-color: #d32f2f; /* Darker red on hover */
@@ -59,13 +58,26 @@ button:hover {
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .btnHapus:hover {
     background-color: white;
     color: black;
+}
+
+.btnDetail {
+    padding: 8px 12px;
+    background-color:#28a745; /* Red background for buttons */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btnDetail:hover {
+    background-color: #d32f2f;
+    color: white;
 }
 
 /* Link kembali ke home */
@@ -107,14 +119,41 @@ a:hover {
     }
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
+/* Pagination Styling */
+.pagination {
+    display: inline-block;
+    margin-top: 20px;
 }
+
+.pagination a, .pagination span {
+    color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid red;
+    margin: 0 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a {
+    background-color: black; /* Normal button background */
+}
+
+.pagination a:hover {
+    background-color: red; /* Button on hover */
+    color: white;
+}
+
+.pagination .active {
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+}
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -21,7 +21,7 @@ if($isMember){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teams</title>
-    <link rel="stylesheet" href="teamm.css">
+    <link rel="stylesheet" href="tim.css">
 </head>
 <body>
     <h2>TEAMS</h2>
@@ -91,20 +91,24 @@ if($isMember){
     ?>
     <!-- Navigasi Halaman -->
     <br>
-    <div>
+    <div class="pagination">
         <?php if ($page > 1): ?>
             <a href="?page=<?php echo $page - 1; ?>"><--Previous</a>
         <?php endif; ?>
 
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            <?php if ($i == $page): ?>
+                <span class="active"><?php echo $i; ?></span>
+            <?php else: ?>
+                <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            <?php endif; ?>
         <?php endfor; ?>
 
         <?php if ($page < $total_pages): ?>
             <a href="?page=<?php echo $page + 1; ?>">Next--></a>
         <?php endif; ?>
     </div>
-    <br>
+
 
     <?php
     if ($isAdmin) {

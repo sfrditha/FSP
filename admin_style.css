@@ -1,0 +1,105 @@
+/* admin_style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #ff2c2c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid red;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    color: #ff2c2c;
+}
+
+td {
+    background-color: #2b2b2b;
+    color: white;
+}
+
+
+button {
+    border: none; /* Menghilangkan border */
+    padding: 8px 12px; /* Padding dalam tombol */
+    margin: 5px;
+    cursor: pointer; /* Mengubah kursor saat hover */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+
+button[type="submit"][name="action"][value="approve"] {
+    background-color: #28a745;
+    color: white;
+}
+
+button[type="submit"][name="action"][value="rejected"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Mengatur tombol spesifik untuk approve dan reject */
+button[type="submit"][name="action"][value="approve"]:hover {
+    background-color: white; /* Warna latar belakang saat hover untuk approve */
+    color: black;
+}
+
+button[type="submit"][name="action"][value="rejected"]:hover {
+    background-color: white; /* Warna latar belakang saat hover untuk reject */
+    color: black;
+}
+
+
+
+.pagination a {
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid red;
+    background-color: #2b2b2b;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: #ff2c2c;
+}
+
+.pagination a.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+select {
+    padding: 10px;
+    background-color: #2b2b2b;
+    color: white;
+    border: 1px solid red;
+    margin: 10px 0;
+}
+
+a {
+    color: #ff2c2c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -27,29 +27,6 @@ label {
     color: #f0f0f0;
 }
 
-/* Gaya khusus untuk input tanggal */
-input[type="date"] {
-    width: 95%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: #333; /* Warna latar belakang gelap */
-    color: #f0f0f0; /* Teks terang */
-    font-size: 16px;
-    appearance: none; /* Menghilangkan tampilan default */
-    -webkit-appearance: none; /* Untuk browser berbasis WebKit */
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* Membuat ikon kalender berwarna terang di latar belakang gelap */
-}
-
-input[type="date"]:focus {
-    border-color: #e53935; /* Warna hijau ketika fokus */
-    outline: none;
-}
-
 input[type="text"], select {
     width: 90%;
     padding: 8px;
@@ -70,7 +47,6 @@ input[type="submit"] {
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

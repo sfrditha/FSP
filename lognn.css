@@ -1,7 +1,7 @@
 /* General styles for the body */
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('bgg.png'); /* Updated background image */
+    background-image: url('bgLogin.png'); /* Updated background image */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -38,7 +38,6 @@ form {
     display: flex;
     flex-direction: column;
 }
-
 
 
 div {

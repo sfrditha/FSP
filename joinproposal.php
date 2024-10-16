@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -172,6 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
     <a href="home.php">Kembali ke Beranda</a>
 </body>
 </html>
+<br>
 
 <?php
 } else {

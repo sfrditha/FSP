@@ -1,0 +1,96 @@
+/* General body settings */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1b1b1b;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for the form */
+form {
+    background-color: #2c2c2c;
+    border-radius: 10px;
+    padding: 30px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Heading styling */
+h2 {
+    font-size: 26px;
+    color: #ff4c4c;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Label styling */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #ccc;
+}
+
+/* Input and select styling */
+input[type="submit"], select, textarea, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Button styling */
+input[type="submit"] {
+    background-color: #e53935;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0px; /* Ensure button is at the bottom */
+}
+
+input[type="submit"]:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Dropdown styling */
+select {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+/* Textarea styling */
+textarea {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+    resize: vertical;
+}
+
+/* Styling for links */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ff4c4c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
