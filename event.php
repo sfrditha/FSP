@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -45,7 +45,7 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     echo "<table border='1'>";
     echo "<tr><th>ID Event</th><th>Nama Event</th><th>Tanggal</th><th>Deskripsi</th>";
     if ($isAdmin) {
-        echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+        echo "<th colspan='2'>Aksi</th>"; 
     }
     echo "</tr>";
 

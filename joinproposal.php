@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -45,6 +45,11 @@ if ($isAdmin) {
     }
     $stmt->execute();
     $result = $stmt->get_result();
+} else {
+    echo "Halaman ini hanya dapat diakses oleh admin";
+    echo '<a href="home.php">Kembali ke Beranda</a>';
+    exit();
+}
 
     //  approve/rejected
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_POST['idjoin_proposal'])) {
@@ -175,11 +180,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
 <br>
 
 <?php
-} else {
-    echo "Halaman ini hanya dapat diakses oleh admin";
-    echo '<a href="home.php">Kembali ke Beranda</a>';
-    exit();
-}
-
 $koneksi->close();
 ?>

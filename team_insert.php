@@ -1,5 +1,5 @@
 <?php
-	$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+	$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 	if ($koneksi -> connect_errno) {
 		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
@@ -46,5 +46,6 @@
 
 		<input type="submit" name="submit" value="Simpan">
 	</form>
+	<a href="home.php">Back to Home</a>
 </body>
 </html>

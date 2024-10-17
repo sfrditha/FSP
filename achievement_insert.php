@@ -15,7 +15,7 @@
 <body>
     <h2>INSERT ACHIEVEMENTS</h2><br><br>
     <?php
-		$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+		$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 		if ($koneksi -> connect_errno) {
 			echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
@@ -28,7 +28,7 @@
 			$date = $_POST['date'];
 			$description = $_POST['description'];
 
-			// Prepare dan insert data ke tabel 'achievement'
+			
 			$sql = "INSERT INTO achievement (idteam, name, date, description) VALUES (?, ?, ?, ?)";
 			$stmt = $koneksi->prepare($sql);
 			$stmt->bind_param("isss", $teamid, $name, $date, $description);
@@ -54,7 +54,7 @@
 			$result = $stmt->get_result();
 
 			echo "<select name='team' id='team-dropdown'>";
-			// Loop through the results dan buat option untuk setiap tim
+			// loop data dan buat option untuk semua tim
 			while ($row = $result->fetch_assoc()) {
 				$val = $row['idteam'];
 				$text = $row['name'];

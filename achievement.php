@@ -1,7 +1,7 @@
 <?php
 session_start(); // Pastikan session dimulai
 
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
@@ -46,8 +46,9 @@ $result = $stmt->get_result();
 echo "<table border='1'>";
 echo "<tr><th>IDAchievement</th><th>Nama Tim</th><th>Name</th><th>Date</th><th>Deskripsi</th>";
 
+// Tampilkan aksi hanya jika user adalah admin
 if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-    echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+    echo "<th colspan='2'>Aksi</th>"; 
 }
 
 echo "</tr>";
@@ -84,7 +85,7 @@ echo "</table>";
 $koneksi->close();
 ?>
 
-<!-- Navigasi Halaman -->
+<!-- buat paging -->
 <br>
     <div class="pagination">
         <?php if ($page > 1): ?>

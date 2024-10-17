@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -27,43 +27,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // // KALAU PAKE HASH
     // jalankan syntax ini dulu di db (ALTER TABLE member MODIFY COLUMN password VARCHAR(255);)
-    // if ($result->num_rows == 1) {
-    //     $row = $result->fetch_assoc();
+    if ($result->num_rows == 1) {
+        $user = $result->fetch_assoc();
 
-    //     // Verifikasi password 
-    //     if (password_verify($password, $row['password'])) {
-    //         // Set sesi untuk username, role, dan nama depan pengguna
-    //         $_SESSION['username'] = $row['username'];
-    //         $_SESSION['role'] = $row['profile']; // Asumsi 'profile' adalah field yang berisi role
-    //         $_SESSION['first_name'] = $row['fname']; // Mengambil nama depan dari database
+        // Verifikasi password 
+        if (password_verify($password, $user['password'])) {
+            // Set sesi untuk username, role, dan nama depan pengguna
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['profile']; // Ambil role dari kolom profile
+            $_SESSION['idmember'] = $user['idmember'];
 
-    //         // Redirect ke halaman home.php
-    //         header("Location: home.php");
-    //         exit();
-    //     } else {
-    //         $error = "Password salah.";
-    //     }
-    // } else {
-    //     $error = "Username tidak ditemukan.";
-    // }
+            // Redirect ke halaman home.php
+            header("Location: home.php");
+            exit();
+        } else {
+            $error = "Password salah.";
+        }
+    } else {
+        $error = "Username tidak ditemukan.";
+    }
 
     // Cek apakah username dan password cocok
 
-    if ($result->num_rows == 1) {
-        // Ambil data user
-        $user = $result->fetch_assoc();
+    // kalau gak pake hash
+    // if ($result->num_rows == 1) {
+    //     // Ambil data user
+    //     $user = $result->fetch_assoc();
         
-        // Set sesi untuk username dan role
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['profile']; // Ambil role dari kolom profile
-        $_SESSION['idmember'] = $user['idmember'];
+    //     // Set sesi untuk username dan role
+    //     $_SESSION['username'] = $user['username'];
+    //     $_SESSION['role'] = $user['profile']; // Ambil role dari kolom profile
+    //     $_SESSION['idmember'] = $user['idmember'];
 
         
-        header("Location: home.php");
-        exit();
-    } else {
-        $error = "Username atau password salah.";
-    }
+    //     header("Location: home.php");
+    //     exit();
+    // } else {
+    //     $error = "Username atau password salah.";
+    // }
 }
 
 $koneksi->close();

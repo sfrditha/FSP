@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed", $koneksi->connect_errno;
@@ -52,6 +52,7 @@ $koneksi->close();
             </a>
         </div>
 
+        <!-- MEMBER -->
         <?php if ($role === 'member'): ?>
         <div class="card">
             <a href="register_team.php">
@@ -62,7 +63,7 @@ $koneksi->close();
         </div>
         <?php endif; ?>
 
-        <!-- Admin-specific cards, visible to admin only -->
+        <!-- ADMIM -->
         <?php if ($role === 'admin'): ?>
         <div class="card">
             <a href="game.php">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -36,7 +36,7 @@ if ($idmember > 0) {
     }
 }
 
-// Menangani proses pendaftaran join proposal
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idteam = isset($_POST['idteam']) ? intval($_POST['idteam']) : 0; // Tim yang dipilih oleh pengguna
     $description = isset($_POST['description']) ? $_POST['description'] : 'role preference: support, attacker, dll'; // Deskripsi default

@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);
@@ -26,19 +26,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
 
         // // kalau pake Hash password 
-        // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // // Query untuk menambahkan pengguna baru ke dalam database
-        // $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
-        // $stmt = $koneksi->prepare($query);
-        // $role = 'member'; // Asumsikan role default adalah 'member'
-        // $stmt->bind_param("sssss", $username, $hashed_password, $role, $first_name, $last_name);
-
-        // Proceed with registration
         $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
         $stmt = $koneksi->prepare($query);
-        $role = 'member'; 
-        $stmt->bind_param("sssss", $username, $password, $role, $first_name, $last_name);
+        $role = 'member'; // Asumsikan role default adalah 'member'
+        $stmt->bind_param("sssss", $username, $hashed_password, $role, $first_name, $last_name);
+
+        // kalau pake gak Hash password 
+        // $query = "INSERT INTO member (username, password, profile, fname, lname) VALUES (?, ?, ?, ?, ?)";
+        // $stmt = $koneksi->prepare($query);
+        // $role = 'member'; 
+        // $stmt->bind_param("sssss", $username, $password, $role, $first_name, $last_name);
 
         if ($stmt->execute()) {
             header("Location: login.php");
