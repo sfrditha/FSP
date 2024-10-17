@@ -1,0 +1,106 @@
+/* General styles for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('bgLogin.png'); /* Updated background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    position: relative; /* For the overlay */
+    color: #f0f0f0;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Main title */
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #e53935;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Container to hold all profile elements */
+.profile-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Profile card styling */
+.profile-card {
+    background-color: rgba(70, 70, 70, 0.8); /* Set background color to dark transparent */
+    border: 2px solid #ffffff; /* Border for card */
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px; /* Card width */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+    color: #f0f0f0; /* Text color */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* Style for card headings */
+.profile-card h2, .profile-card h3 {
+    color: #e53935; /* Red text for headers */
+    font-weight: bold;
+}
+
+/* Adjust text color inside the card */
+.profile-card p, .profile-card strong {
+    color: #f0f0f0;
+}
+
+/* List styling inside the card */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+ul li {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent list items */
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0; /* Border around list items */
+    color: #ffffff; /* Text color */
+}
+
+/* Button at the bottom */
+a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: #e53935; /* Button background */
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: white; /* Darken button on hover */
+    color: black;
+}
+
+.profile-footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .profile-card {
+        width: 90%;
+    }
+}

@@ -80,16 +80,6 @@ button:hover {
     color: white;
 }
 
-/* Link kembali ke home */
-a {
-    text-decoration: none;
-    color: #e53935;
-}
-
-a:hover {
-    text-decoration: underline;
-
-}
 
 /* Responsif untuk layar yang lebih kecil */
 @media (max-width: 600px) {

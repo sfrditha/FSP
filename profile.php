@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+$koneksi = new mysqli("localhost:3307", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed", $koneksi->connect_errno;
@@ -51,29 +51,41 @@ $koneksi->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    <h1>User Profile</h1>
-    <div class="profile-card">
-        <h2><?php echo $user['fname'] . " " . $user['lname']; ?></h2>
-        <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
-        <p><strong>Profile:</strong> <?php echo ucfirst($user['profile']); ?></p>
+    <!-- User Profile Title (Outside Card) -->
+    <h1>USER PROFILE</h1>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- User Full Name (Bold) -->
+            <h2><?php echo "<strong>" . $user['fname'] . " " . $user['lname'] . "</strong>"; ?></h2>
+            <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
+            <p><strong>Profile:</strong> <?php echo ucfirst($user['profile']); ?></p>
+            <br>
+            <!-- Team Information -->
+            <h3>Team Information</h3>
+            <?php if (!empty($teams)): ?>
+                <ul>
+                    <?php foreach ($teams as $team): ?>
+                        <li>
+                            <strong>Team:</strong> <?php echo $team['team_name']; ?> <br>
+                            <strong>Position:</strong> <?php echo $team['position']; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>You are not a member of any team.</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Back to Home Button -->
+        <div class="profile-footer">
+            <a href="home.php">Back to Home</a>
+        </div>
     </div>
-
-    <h3>Team Information</h3>
-    <?php if (!empty($teams)): ?>
-        <ul>
-            <?php foreach ($teams as $team): ?>
-                <li>
-                    <strong>Team:</strong> <?php echo $team['team_name']; ?> <br>
-                    <strong>Position:</strong> <?php echo $team['position']; ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>You are not a member of any team.</p>
-    <?php endif; ?>
-
-    <a href="home.php">Back to Home</a>
 </body>
 </html>
+
+
