@@ -1,0 +1,102 @@
+/* General styles for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('img/bgLogn.png'); /* Updated background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    position: relative; /* For the overlay */
+    color: #f0f0f0;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+
+h1 {
+    margin-bottom: 20px;
+    color: #e53935;
+    text-align: center;
+    font-size: 28px;
+}
+
+form {
+    background-color: rgba(70, 70, 70, 0.8); /* Semi-transparent background */
+    padding: 30px; /* Increased padding */
+    border: 2px solid rgba(255, 255, 255, 0.8); /* White outline */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    width: 500px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: none; /* Hide labels */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Tambahkan padding kanan untuk ikon */
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 10px;
+    background-image: url('path/to/user-icon.png'); /* Ganti dengan path ikon pengguna */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posisi ikon pengguna */
+}
+
+input[type="password"] {
+    background-image: url('path/to/lock-icon.png'); /* Ganti dengan path ikon kunci */
+    background-position: right 10px center; /* Posisi ikon kunci */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d32f2f; /* Button color */
+    color: #fff;
+    border: none;
+    border-radius: 10px; /* Rounded button */
+    cursor: pointer;
+    font-size: 18px; /* Increased font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #fff; /* Change background on hover */
+    color: #d32f2f; /* Change text color on hover */
+}
+
+p {
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    color: #d32f2f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

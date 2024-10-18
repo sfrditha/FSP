@@ -1,6 +1,6 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed", $koneksi->connect_errno;
@@ -17,7 +17,7 @@ $koneksi->close();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eSport Website</title>
-    <link rel="stylesheet" type="text/css" href="hom.css">
+    <link rel="stylesheet" type="text/css" href="homm.css">
     <script type="text/javascript">
         window.onload = function() {
             alert("Koneksi sukses.");
