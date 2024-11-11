@@ -1,14 +1,26 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+require_once 'database.php';  
+require_once 'game_class.php'; 
 
-if ($koneksi->connect_errno) {
-    echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
-}
+$database = new Database();
+$koneksi = $database->getConnection();
 
-// Cek role
 $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+
+$limit = 5;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$start = ($page > 1) ? ($page * $limit) - $limit : 0;
+
+$game = new Game($koneksi);
+$total = $game->getTotalGames();
+
+$total_pages = ceil($total / $limit);
+
+$games = $game->getGames($limit, $start);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,38 +32,16 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 <body>
     <h2>GAMES</h2>
     <?php
-
-    // Tentukan jumlah data per halaman
-    $limit = 5;
-
-    // Ambil halaman saat ini dari URL, jika tidak ada halaman maka halaman 1
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    $start = ($page > 1) ? ($page * $limit) - $limit : 0;
-
-    // Hitung total data
-    $result_total = $koneksi->query("SELECT COUNT(*) AS total FROM game");
-    $row_total = $result_total->fetch_assoc();
-    $total = $row_total['total'];
-
-    // Hitung jumlah halaman
-    $total_pages = ceil($total / $limit);
-
-    $sql = "SELECT * FROM game
-            LIMIT $start, $limit";
-    $stmt = $koneksi->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
     echo "<table border='1'>";
     echo "<tr><th>ID Game</th><th>Nama Game</th><th>Deskripsi</th>";
 
     if ($isAdmin) {
-        echo "<th colspan='2'>Aksi</th>"; // Tampilkan aksi hanya jika user adalah admin
+        echo "<th colspan='2'>Aksi</th>"; 
     }
 
     echo "</tr>";
 
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $games->fetch_assoc()) {
         echo "<tr>";
         echo "<td>".$row['idgame']."</td>";
         echo "<td>".$row['name']."</td>";
@@ -74,12 +64,9 @@ $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
         echo "</tr>";
     }
     echo "</table>";
-
-    
-
-    $koneksi->close();
     ?>
-    <!-- Navigasi Halaman -->
+
+    <!-- PAGING -->
     <br>
     <div class="pagination">
         <?php if ($page > 1): ?>

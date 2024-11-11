@@ -1,36 +1,28 @@
 <?php
-session_start(); // Pastikan session dimulai
+session_start(); 
 
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
 
-if ($koneksi->connect_errno) {
-    echo "Koneksi ke Database Failed: " . $koneksi->connect_errno;
-}
+require_once 'database.php';
+require_once 'achievement_class.php';
 
-// Tentukan jumlah data per halaman
+
+$db = new Database();
+$koneksi = $db->getConnection();
+
 $limit = 5;
 
-// Ambil halaman saat ini dari URL, jika tidak ada halaman maka halaman 1
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page > 1) ? ($page * $limit) - $limit : 0;
 
-// Hitung total data
-$result_total = $koneksi->query("SELECT COUNT(*) AS total FROM achievement");
-$row_total = $result_total->fetch_assoc();
-$total = $row_total['total'];
+$achievement = new Achievement($koneksi);
 
-// Hitung jumlah halaman
+$total = $achievement->getTotalAchievements();
+
 $total_pages = ceil($total / $limit);
 
-$sql = "SELECT achievement.idachievement, team.name AS team_name, achievement.name, achievement.date, achievement.description
-        FROM achievement
-        JOIN team ON achievement.idteam = team.idteam
-        LIMIT $start, $limit"; // Tambahkan LIMIT untuk pagination
-$stmt  = $koneksi->prepare($sql);
-$stmt->execute();
-$result = $stmt->get_result();
-
+$result = $achievement->getAchievements($limit, $start);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,8 +54,9 @@ while ($row = $result->fetch_assoc()) {
     echo "<td>".$rilis."</td>";
     echo "<td>".$row['description']."</td>";
     
-    // Tombol hapus
+    
     if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+        // Tombol hapus
         echo "<td>
                 <form action='achievement_hapus.php' method='POST'>
                     <input type='hidden' name='idachievement' value='".$row['idachievement']."'>
@@ -82,28 +75,28 @@ while ($row = $result->fetch_assoc()) {
 }
 echo "</table>";
 
-$koneksi->close();
+$db->closeConnection();
 ?>
 
 <!-- buat paging -->
 <br>
-    <div class="pagination">
-        <?php if ($page > 1): ?>
-            <a href="?page=<?php echo $page - 1; ?>"><--Previous</a>
-        <?php endif; ?>
+<div class="pagination">
+    <?php if ($page > 1): ?>
+        <a href="?page=<?php echo $page - 1; ?>"><--Previous</a>
+    <?php endif; ?>
 
-        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-            <?php if ($i == $page): ?>
-                <span class="active"><?php echo $i; ?></span>
-            <?php else: ?>
-                <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-            <?php endif; ?>
-        <?php endfor; ?>
-
-        <?php if ($page < $total_pages): ?>
-            <a href="?page=<?php echo $page + 1; ?>">Next--></a>
+    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+        <?php if ($i == $page): ?>
+            <span class="active"><?php echo $i; ?></span>
+        <?php else: ?>
+            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
         <?php endif; ?>
-    </div>
+    <?php endfor; ?>
+
+    <?php if ($page < $total_pages): ?>
+        <a href="?page=<?php echo $page + 1; ?>">Next--></a>
+    <?php endif; ?>
+</div>
 <br>
 
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
