@@ -3,41 +3,32 @@ session_start();
 require_once 'database.php';
 require_once 'joinproposal_class.php';
 
-// Membuat objek Database untuk koneksi
 $database = new Database();
 $koneksi = $database->getConnection();
 
-// Cek role
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 $isAdmin = $role === 'admin';
 
 if ($isAdmin) {
-    // Tentukan jumlah data per halaman
     $limit = 5;
 
-    // Ambil halaman saat ini dari URL, jika tidak ada halaman maka halaman 1
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $start = ($page > 1) ? ($page * $limit) - $limit : 0;
 
-    // Menggunakan kelas JoinProposal untuk mendapatkan data
     $joinProposal = new JoinProposal($koneksi);
     $status_filter = isset($_GET['status']) ? $_GET['status'] : 'all';
     $result = $joinProposal->getJoinProposals($limit, $start, $status_filter);
 
-    // Hitung total data
     $total = $joinProposal->getTotalJoinProposals($status_filter);
     $total_pages = ceil($total / $limit);
 
-    //  approve/rejected
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_POST['idjoin_proposal'])) {
         $idproposal = intval($_POST['idjoin_proposal']);
         $action = $_POST['action'];
 
         if ($action === 'approve') {
-            // Update status menjadi 'approved'
             $joinProposal->updateJoinProposalStatus($idproposal, 'approved');
 
-            // Ambil data idteam dan idmember dari proposal yang di-approve
             $get_proposal_sql = "SELECT idteam, idmember FROM join_proposal WHERE idjoin_proposal = ?";
             $get_proposal_stmt = $koneksi->prepare($get_proposal_sql);
             $get_proposal_stmt->bind_param("i", $idproposal);
@@ -47,7 +38,6 @@ if ($isAdmin) {
             $idteam = $proposal_data['idteam'];
             $idmember = $proposal_data['idmember'];
 
-            // Periksa apakah member sudah ada di team_members
             $check_sql = "SELECT COUNT(*) AS count FROM team_members WHERE idteam = ? AND idmember = ?";
             $check_stmt = $koneksi->prepare($check_sql);
             $check_stmt->bind_param("ii", $idteam, $idmember);
@@ -55,7 +45,6 @@ if ($isAdmin) {
             $check_result = $check_stmt->get_result()->fetch_assoc();
 
             if ($check_result['count'] == 0) {
-                // Masukkan data ke tabel team_members jika belum ada
                 $insert_sql = "INSERT INTO team_members (idteam, idmember, description) 
                                SELECT idteam, idmember, description FROM join_proposal WHERE idjoin_proposal = ?";
                 $insert_stmt = $koneksi->prepare($insert_sql);
@@ -66,7 +55,6 @@ if ($isAdmin) {
             $joinProposal->updateJoinProposalStatus($idproposal, 'rejected');
         }
 
-        // Redirect kembali ke halaman untuk mencegah pengulangan post data
         header("Location: joinproposal.php?status=$status_filter&page=$page");
         exit();
     }
