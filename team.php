@@ -31,8 +31,8 @@ $result = $team->getTeams($start, $limit);
 <body>
     <h2>TEAMS</h2>
     <table border='1'>
-        <tr><th>ID Team</th><th>ID Game</th><th>Nama Team</th>
-        <?php if ($isAdmin) echo "<th colspan='3'>Aksi</th>"; ?>
+        <tr><th>ID Team</th><th>Game</th><th>Nama Team</th><th>Foto Team</th>
+        <?php if ($isAdmin) echo "<th colspan='4'>Aksi</th>"; ?>
         </tr>
 
         <?php while ($row = $result->fetch_assoc()): ?>
@@ -40,6 +40,10 @@ $result = $team->getTeams($start, $limit);
                 <td><?php echo $row['idteam']; ?></td>
                 <td><?php echo $row['game']; ?></td>
                 <td><?php echo $row['name']; ?></td>
+                <!-- Buat foto -->
+                <td>
+                <img src="img/<?php echo $row['idteam']; ?>.jpg" alt="Team Photo" style="width: 100px; height: 50px;">
+                </td>
                 <?php if ($isAdmin): ?>
                     <td>
                         <form action="team_hapus.php" method="POST">
