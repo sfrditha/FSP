@@ -80,6 +80,31 @@ class Achievement {
         $stmt = $this->koneksi->prepare($sql);
         $stmt->bind_param("i", $idachievement);
         $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function getAchievement($idachievement) {
+        $sql = "SELECT * FROM achievement WHERE idachievement = ?";
+        $stmt = $this->koneksi->prepare($sql);
+        $stmt->bind_param("i",$idachievement);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function updateAchievement($idteam, $name, $date, $description, $idachievement){
+        $sql = "UPDATE achievement SET idteam = ?, name = ?, date = ?, description = ? WHERE idachievement = ?";
+		$stmt = $this->koneksi->prepare($sql);
+		$stmt->bind_param("isssi", $idteam, $name, $date, $description, $idachievement);
+		$stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function insertAchievement($teamid, $name, $date, $description){
+        $sql = "INSERT INTO achievement (idteam, name, date, description) VALUES (?, ?, ?, ?)";
+		$stmt = $this->koneksi->prepare($sql);
+		$stmt->bind_param("isss", $teamid, $name, $date, $description);
+        $stmt->execute();
+        return $stmt->affected_rows;
     }
 }
 ?>

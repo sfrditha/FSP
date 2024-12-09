@@ -100,5 +100,46 @@ class JoinProposal {
         $stmt->bind_param("si", $status, $idjoin_proposal);
         $stmt->execute();
     }
+
+    public function memberStatus($idmember){
+        $sql = "SELECT status FROM join_proposal WHERE idmember = ?";
+        $stmt = $this->koneksi->prepare($sql);
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function insertJoinProposal($idteam, $idmember, $description, $status){
+        $sql = "INSERT INTO join_proposal (idteam, idmember, description, status) VALUES (?, ?, ?, ?)";
+        $stmt = $this->koneksi->prepare($sql);
+        $stmt->bind_param("iiss", $idteam, $idmember, $description, $status);
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function getId_TeamMember($idproposal){
+        $get_proposal_sql = "SELECT idteam, idmember FROM join_proposal WHERE idjoin_proposal = ?";
+        $get_proposal_stmt = $this->koneksi->prepare($get_proposal_sql);
+        $get_proposal_stmt->bind_param("i", $idproposal);
+        $get_proposal_stmt->execute();
+        return $get_proposal_stmt->get_result();
+    }
+
+    public function cekProposal($idteam, $idmember){
+        $check_sql = "SELECT COUNT(*) AS count FROM team_members WHERE idteam = ? AND idmember = ?";
+        $check_stmt = $this->koneksi->prepare($check_sql);
+        $check_stmt->bind_param("ii", $idteam, $idmember);
+        $check_stmt->execute();
+        return $check_stmt->get_result();
+    }
+
+    public function statusApproved($idproposal){
+        $insert_sql = "INSERT INTO team_members (idteam, idmember, description) 
+                               SELECT idteam, idmember, description FROM join_proposal WHERE idjoin_proposal = ?";
+        $insert_stmt = $this->koneksi->prepare($insert_sql);
+        $insert_stmt->bind_param("i", $idproposal);
+        $insert_stmt->execute();
+        return $insert_stmt->affected_rows;
+    }
 }
 ?>

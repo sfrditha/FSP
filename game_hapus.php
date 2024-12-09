@@ -1,19 +1,16 @@
 <?php
-	$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+require_once 'database.php';  
+require_once 'game_class.php'; 
 
-	if ($koneksi -> connect_errno) {
-		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
-	}
+$database = new Database();
+$koneksi = $database->getConnection();
+$game = new Game($koneksi);
 
-	if (isset($_POST['idgame'])) {
-		$idgame = $_POST['idgame'];
+if (isset($_POST['idgame'])) {
+    $idgame = $_POST['idgame'];
 
-		$sql = "DELETE FROM game WHERE idgame = ?";
-		$stmt = $koneksi->prepare($sql);
-		$stmt->bind_param("i", $idgame);
-		$stmt->execute();
+    $game->deleteGame($idgame);
 
-		$koneksi->close();
-		header("Location: game.php");
-	}
+    header("Location: game.php");
+}
 ?>

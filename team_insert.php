@@ -1,31 +1,23 @@
 <?php
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+require_once 'database.php';
+require_once 'team_class.php';
 
-if ($koneksi->connect_errno) {
-    echo "Koneksi ke Database Failed: ", $koneksi->connect_error;
-}
+$db = new Database();
+$koneksi = $db->getConnection();
+$team = new Team($koneksi);
 
 if (isset($_POST['submit'])) {
     $idgame = $_POST['idgame'];
     $team_name = $_POST['name'];
-    
-    // Insert tanpa foto dulu
-    $sql = "INSERT INTO team (idgame, name) VALUES (?, ?)";
-    $stmt = $koneksi->prepare($sql);
-    $stmt->bind_param("is", $idgame, $team_name);
-    $stmt->execute();
-    
-    // Dapatkan ID team yang baru dimasukkan
-    $idteam = $stmt->insert_id;
-    
-    // Jika ada file yang diunggah, simpan ke folder img dengan nama idteam
+    $idteam = $team->insertTeam($idgame, $team_name);
+
+    // Upload foto jika ada
     if (!empty($_FILES['photo']['name'])) {
         $lokasi = "img/";
         $namaFile = $lokasi . $idteam . ".jpg"; 
         move_uploaded_file($_FILES['photo']['tmp_name'], $namaFile);
     }
 
-    $stmt->close();
     $koneksi->close();
     header("Location: team.php");
 }

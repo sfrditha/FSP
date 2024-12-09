@@ -1,7 +1,7 @@
 /* General styles for the body */
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('bgLogin.png'); /* Updated background image */
+    background-image: url('img/bgLogn.png'); /* Updated background image */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

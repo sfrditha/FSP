@@ -1,53 +1,45 @@
 <?php
-	$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+require_once 'database.php';  
+require_once 'event_class.php';
 
-	if ($koneksi -> connect_errno) {
-		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
-	}
+$database = new Database();
+$koneksi = $database->getConnection();
+$event = new Event($koneksi);
 
-	if (isset($_GET['idevent'])) {
-		$idevent = $_GET['idevent'];
+if (isset($_GET['idevent'])) {
+    $idevent = $_GET['idevent'];
+    $result = $event->getEvent($idevent);
+    $row = $result->fetch_assoc();
+}
 
-		$sql = "SELECT * FROM event WHERE idevent = ?";
-		$stmt = $koneksi->prepare($sql);
-		$stmt->bind_param("i", $idevent);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
-	}
+if (isset($_POST['submit'])) {
+    $idevent = $_POST['idevent'];
+    $name = $_POST['name'];
+    $date = $_POST['date'];
+    $description = $_POST['description'];
 
-	if (isset($_POST['submit'])) {
-		$idevent = $_POST['idevent'];
-		$name = $_POST['name'];
-		$date = $_POST['date'];
-		$description = $_POST['description'];
+    $event->updateEvent($name, $date, $description, $idevent);
 
-		$sql = "UPDATE event SET name = ?, date = ?, description = ? WHERE idevent = ?";
-		$stmt = $koneksi->prepare($sql);
-		$stmt->bind_param("sssi", $name, $date, $description, $idevent);
-		$stmt->execute();
-
-		$koneksi->close();
-		header("Location: event.php");
-	}
+    header("Location: event.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Edit Event</title>
-	<link rel="stylesheet" href="eventAdEditt.css">
+    <title>Edit Event</title>
+    <link rel="stylesheet" href="eventAdEditt.css">
 </head>
 <body>
-	<h2>EDIT EVENTS</h2>
-	<form action="" method="POST">
-		<input type="hidden" name="idevent" value="<?php echo $row['idevent']; ?>">
-		<label>Nama Event:</label><br>
-		<input type="text" name="name" value="<?php echo $row['name']; ?>"><br><br>
-		<label>Tanggal:</label><br>
-		<input type="date" name="date" value="<?php echo $row['date']; ?>"><br><br>
-		<label>Deskripsi:</label><br>
-		<input type="text" name="description" value="<?php echo $row['description']; ?>"><br><br>
-		<input type="submit" name="submit" value="Update">
-	</form>
+    <h2>EDIT EVENTS</h2>
+    <form action="" method="POST">
+        <input type="hidden" name="idevent" value="<?php echo $row['idevent']; ?>">
+        <label>Nama Event:</label><br>
+        <input type="text" name="name" value="<?php echo $row['name']; ?>"><br><br>
+        <label>Tanggal:</label><br>
+        <input type="date" name="date" value="<?php echo $row['date']; ?>"><br><br>
+        <label>Deskripsi:</label><br>
+        <input type="text" name="description" value="<?php echo $row['description']; ?>"><br><br>
+        <input type="submit" name="submit" value="Update">
+    </form>
 </body>
 </html>

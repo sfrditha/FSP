@@ -1,19 +1,15 @@
 <?php
-	$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+require_once 'database.php';  
+require_once 'event_class.php';
 
-	if ($koneksi -> connect_errno) {
-		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
-	}
+$database = new Database();
+$koneksi = $database->getConnection();
+$event = new Event($koneksi);
 
-	if (isset($_POST['idevent'])) {
-		$idevent = $_POST['idevent'];
+if (isset($_POST['idevent'])) {
+    $idevent = $_POST['idevent'];
+    $event->deleteEvent($idevent);
 
-		$sql = "DELETE FROM event WHERE idevent = ?";
-		$stmt = $koneksi->prepare($sql);
-		$stmt->bind_param("i", $idevent);
-		$stmt->execute();
-
-		$koneksi->close();
-		header("Location: event.php");
-	}
+    header("Location: event.php");
+}
 ?>

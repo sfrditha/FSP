@@ -11,7 +11,6 @@ $isAdmin = $role === 'admin';
 
 if ($isAdmin) {
     $limit = 5;
-
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $start = ($page > 1) ? ($page * $limit) - $limit : 0;
 
@@ -28,28 +27,15 @@ if ($isAdmin) {
 
         if ($action === 'approve') {
             $joinProposal->updateJoinProposalStatus($idproposal, 'approved');
-
-            $get_proposal_sql = "SELECT idteam, idmember FROM join_proposal WHERE idjoin_proposal = ?";
-            $get_proposal_stmt = $koneksi->prepare($get_proposal_sql);
-            $get_proposal_stmt->bind_param("i", $idproposal);
-            $get_proposal_stmt->execute();
-            $proposal_data = $get_proposal_stmt->get_result()->fetch_assoc();
-
+            $proposal_data = $joinProposal->getId_TeamMember($idproposal)->fetch_assoc();
             $idteam = $proposal_data['idteam'];
             $idmember = $proposal_data['idmember'];
 
-            $check_sql = "SELECT COUNT(*) AS count FROM team_members WHERE idteam = ? AND idmember = ?";
-            $check_stmt = $koneksi->prepare($check_sql);
-            $check_stmt->bind_param("ii", $idteam, $idmember);
-            $check_stmt->execute();
-            $check_result = $check_stmt->get_result()->fetch_assoc();
+            // Check if the member is already in the team
+            $check_result = $joinProposal->cekProposal($idteam, $idmember)->fetch_assoc();
 
             if ($check_result['count'] == 0) {
-                $insert_sql = "INSERT INTO team_members (idteam, idmember, description) 
-                               SELECT idteam, idmember, description FROM join_proposal WHERE idjoin_proposal = ?";
-                $insert_stmt = $koneksi->prepare($insert_sql);
-                $insert_stmt->bind_param("i", $idproposal);
-                $insert_stmt->execute();
+                $joinProposal->statusApproved($idproposal);
             }
         } elseif ($action === 'rejected') {
             $joinProposal->updateJoinProposalStatus($idproposal, 'rejected');

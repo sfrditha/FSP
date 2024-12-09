@@ -1,82 +1,58 @@
+<?php
+require_once 'database.php';
+require_once 'achievement_class.php';
+
+$db = new Database();
+$koneksi = $db->getConnection();
+$achievement = new Achievement($koneksi);
+
+if (isset($_POST['submit'])) {
+    $teamid = $_POST['team'];
+    $name = $_POST['name'];
+    $date = $_POST['date'];
+    $description = $_POST['description'];
+
+    if ($achievement->insertAchievement($teamid, $name, $date, $description) > 0) {
+        header("Location: achievement.php");
+        exit();
+    } else {
+        echo "<p style='color: red;'>Gagal menambahkan achievement.</p>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>INSERT ACHIEVEMENT</title>
-    <style type="text/css">
-		label 
-		{
-			display: inline-block;
-			width: 80px;
-		}
-	</style>
+    <title>INSERT ACHIEVEMENT</title>
+    <link rel="stylesheet" href="achievementAddEditt.css">
 </head>
 <body>
     <h2>INSERT ACHIEVEMENTS</h2><br><br>
-    <?php
-		$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+    <form method="post" action="">
+        <label>Nama Team</label>
+        <select name="team">
+            <?php
+            $sql = "SELECT * FROM team";
+            $stmt = $koneksi->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-		if ($koneksi -> connect_errno) {
-			echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
-		}
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='".$row['idteam']."'>".$row['name']."</option>";
+            }
+            ?>
+        </select><br><br>
 
-		// Cek apakah form telah disubmit
-		if (isset($_POST['submit'])) {
-			$teamid = $_POST['team'];
-			$name = $_POST['name'];
-			$date = $_POST['date'];
-			$description = $_POST['description'];
+        <label>Kejuaraan</label>
+        <input type="text" name="name" required><br><br>
 
-			
-			$sql = "INSERT INTO achievement (idteam, name, date, description) VALUES (?, ?, ?, ?)";
-			$stmt = $koneksi->prepare($sql);
-			$stmt->bind_param("isss", $teamid, $name, $date, $description);
+        <label>Tanggal</label>
+        <input type="date" name="date" required><br><br>
 
-			if ($stmt->execute()) {
-				// Jika berhasil, redirect ke halaman achievement.php
-				header("Location: achievement.php");
-				exit();
-			} else {
-				echo "<p style='color: red;'>Gagal menambahkan achievement: " . $koneksi->error . "</p>";
-			}
-		}
-	?>
+        <label>Deskripsi</label>
+        <textarea name="description" rows="4" cols="50" required></textarea><br><br>
 
-    <form method="post" enctype="multipart/form-data" action="">
-		<label>NamaTeam</label>
-		<link rel="stylesheet" href="achievementAddEditt.css">
-		<?php
-			// Ambil data tim untuk dropdown
-			$sql = "SELECT * FROM team";
-			$stmt = $koneksi->prepare($sql);
-			$stmt->execute();
-			$result = $stmt->get_result();
-
-			echo "<select name='team' id='team-dropdown'>";
-			// loop data dan buat option untuk semua tim
-			while ($row = $result->fetch_assoc()) {
-				$val = $row['idteam'];
-				$text = $row['name'];
-				echo "<option value='$val'>$text</option>";
-			}
-			echo "</select>";
-		?><br><br>
-
-		<label>Kejuaraan</label>
-		<input type="text" name="name" required><br><br>
-
-		<label>Tanggal</label>
-		<input type="date" name="date" required><br><br>
-
-		<label>Deskripsi</label>
-		<textarea name="description" rows="4" cols="50" placeholder="Masukan Deskripsi" required></textarea><br><br>
-
-		<input type="submit" name="submit" value="Insert Achievement"><br>
-	</form>
-
-    <?php
-    $koneksi->close();
-    ?>
+        <input type="submit" name="submit" value="Insert Achievement">
+    </form>
 </body>
 </html>

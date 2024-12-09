@@ -1,29 +1,20 @@
 <?php
-	$koneksi = new mysqli("localhost:3306","root","","esport"); 
+require_once 'database.php';
+require_once 'achievement_class.php';
 
-	if ($koneksi -> connect_errno)
-	{
-		echo "Koneksi ke Database Failed", $koneksi -> connect_errno;
-	}
+$db = new Database();
+$koneksi = $db->getConnection();
+$achievement = new Achievement($koneksi);
 
-	if (isset($_POST['idachievement'])) {
-		$idachievement = $_POST['idachievement'];
+if (isset($_POST['idachievement'])) {
+    $idachievement = $_POST['idachievement'];
 
-		// Query untuk menghapus data berdasarkan idachievement
-		$sql = "DELETE FROM achievement WHERE idachievement = ?";
-		$stmt = $koneksi->prepare($sql);
-		$stmt->bind_param("i", $idachievement);
-		$stmt->execute();
+    if ($achievement->deleteAchievement($idachievement) > 0) {
+        echo "Data berhasil dihapus.";
+    } else {
+        echo "Error dalam menghapus data.";
+    }
+}
 
-		if ($stmt) {
-			echo "Data berhasil dihapus.";
-		} else {
-			echo "Error dalam menghapus data.";
-		}
-
-		$koneksi->close();
-	}
-
-	// Redirect kembali ke halaman achievement
-	header("Location: achievement.php");
+header("Location: achievement.php");
 ?>

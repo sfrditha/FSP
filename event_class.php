@@ -67,6 +67,31 @@ class Event {
         $stmt = $this->koneksi->prepare($sql);
         $stmt->bind_param("i", $idevent);
         $stmt->execute();
+        return $stmt->affected_rows;
+    }
+    public function getEvent($idevent){
+        $sql = "SELECT * FROM event WHERE idevent = ?";
+		$stmt = $this->koneksi->prepare($sql);
+		$stmt->bind_param("i", $idevent);
+		$stmt->execute();
+		return $stmt->get_result();
+        
+    }
+
+    public function updateEvent($name, $date, $description, $idevent){
+        $sql = "UPDATE event SET name = ?, date = ?, description = ? WHERE idevent = ?";
+		$stmt = $this->koneksi->prepare($sql);
+		$stmt->bind_param("sssi", $name, $date, $description, $idevent);
+		$stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function insertEvent($name, $date, $description){
+        $sql = "INSERT INTO event (name, date, description) VALUES (?, ?, ?)";
+		$stmt = $this->koneksi->prepare($sql);
+		$stmt->bind_param("sss", $name, $date, $description);
+		$stmt->execute();
+        return $stmt->affected_rows;
     }
 }
 ?>

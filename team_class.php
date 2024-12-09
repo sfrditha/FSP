@@ -52,7 +52,68 @@ class Team {
         $sql = "DELETE FROM team WHERE idteam = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("i", $id);
-        return $stmt->execute();
+        $stmt->execute();
+        return $stmt->affected_rows;
+    }
+
+    public function getTeam($idteam){
+        $sql = "SELECT * FROM team WHERE idteam = ?";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bind_param("i", $idteam);
+		$stmt->execute();
+		return $stmt->get_result();
+    }
+
+    public function updateTeam($idgame, $team_name, $idteam){
+        $sql = "UPDATE team SET idgame = ?, name = ? WHERE idteam = ?";
+		$stmt = $this->db->prepare($sql);
+		$stmt->bind_param("isi", $idgame, $team_name, $idteam);
+		$stmt->execute();
+        return $stmt->affected_rows;
+    }
+    public function insertTeam($idgame, $team_name){
+        $sql = "INSERT INTO team (idgame, name) VALUES (?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("is", $idgame, $team_name);
+        $stmt->execute();
+        return $stmt->insert_id;
+    }
+    public function getIdTeams($idmember){
+        $sql = "SELECT idteam FROM team_members WHERE idmember = ?;";
+        $stmt = $this->db->prepare($sql);
+		$stmt->bind_param("i", $idmember);
+		$stmt->execute();
+		return $stmt->get_result();
+    }
+
+    public function displayMembers($idteam){
+        $sql = "SELECT tm.idteam, m.fname, m.lname, tm.description
+                    FROM team_members tm
+                    INNER JOIN member m ON tm.idmember = m.idmember
+                    WHERE tm.idteam = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function displayAchievements($idteam){
+        $sql = "SELECT * FROM achievement WHERE idteam = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function displayEvents($idteam){
+        $sql = "SELECT * 
+                    FROM event_teams et
+                    INNER JOIN event e ON et.idevent = e.idevent
+                    WHERE et.idteam = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        return $stmt->get_result();
     }
 }
 ?>
