@@ -61,15 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="" method="POST">
         <label for="idteam">Pilih Tim:</label>
         <select name="idteam" id="idteam" required>
-            <!-- Add your teams dynamically here -->
-            <option value="1">Tim A</option>
-            <option value="2">Tim B</option>
-            <!-- Add more teams -->
-        </select>
-        <br>
+            <option value="">-- Pilih Tim --</option>
+            <?php
+            $result = $joinProposal->getTeams();
 
-        <label for="description">Deskripsi Singkat Anda:</label>
-        <textarea name="description" id="description" rows="4" cols="50" placeholder="Tulis sesuatu tentang diri Anda dan alasan mengajukan pengajuan" required></textarea>
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row['idteam'] . "'>" . $row['name'] . "</option>";
+            }
+            ?>
+        </select><br><br>
+
+        <label for="description">Posisi:</label>
+        <textarea name="description" id="description" rows="4" cols="50" placeholder="Tulis Posisi yang anda inginkan di team ini" required></textarea>
         <br>
 
         <input type="submit" value="Kirim Pengajuan">

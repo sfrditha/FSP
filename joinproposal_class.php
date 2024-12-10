@@ -141,5 +141,12 @@ class JoinProposal {
         $insert_stmt->execute();
         return $insert_stmt->affected_rows;
     }
+
+    public function getTeams(){
+        $sql = "SELECT idteam, name FROM team";
+        $result = $this->koneksi->prepare($sql);
+        $result->execute();
+        return $result->get_result();
+    }
 }
 ?>

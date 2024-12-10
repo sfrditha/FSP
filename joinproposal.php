@@ -80,7 +80,7 @@ if ($isAdmin) {
                 <th>Nama Member</th>
                 <th>Deskripsi</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th colspan="2">Aksi</th>
             </tr>
         </thead>
         <tbody>
