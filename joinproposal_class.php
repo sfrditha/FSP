@@ -142,9 +142,13 @@ class JoinProposal {
         return $insert_stmt->affected_rows;
     }
 
-    public function getTeams(){
-        $sql = "SELECT idteam, name FROM team";
+    public function getTeams($idmember){
+        $sql = "SELECT t.idteam, t.name
+                FROM team t
+                LEFT JOIN team_members m ON t.idteam = m.idteam AND m.idmember = ?
+                WHERE m.idteam IS NULL;";
         $result = $this->koneksi->prepare($sql);
+        $result->bind_param("i", $idmember);
         $result->execute();
         return $result->get_result();
     }

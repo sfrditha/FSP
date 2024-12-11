@@ -19,9 +19,7 @@ if ($idmember > 0) {
             echo "<a href='home.php'>Kembali ke Beranda</a>";
             exit();
         } elseif ($status === 'approved') {
-            echo "<p>Pengajuan Anda telah <b>'Diterima'</b>. Anda sekarang anggota tim.</p>";
-            echo "<a href='home.php'>Kembali ke Beranda</a>";
-            exit();
+            echo "<p>Pengajuan Anda  sebelumnya telah <b>'Diterima'</b>. Anda sekarang anggota tim.</p>";
         } elseif ($status === 'rejected') {
             echo "<p>Pengajuan Anda telah <b>'Ditolak'</b>. Silakan ajukan ke tim lain atau perbarui permintaan.</p>";
         }
@@ -63,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <select name="idteam" id="idteam" required>
             <option value="">-- Pilih Tim --</option>
             <?php
-            $result = $joinProposal->getTeams();
+            $result = $joinProposal->getTeams($idmember);
 
             while ($row = $result->fetch_assoc()) {
                 echo "<option value='" . $row['idteam'] . "'>" . $row['name'] . "</option>";
