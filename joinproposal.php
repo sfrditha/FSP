@@ -57,7 +57,7 @@ if ($isAdmin) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Kelola Join Proposal</title>
-    <link rel="stylesheet" type="text/css" href="admin_style.css">
+    <link rel="stylesheet" type="text/css" href="admin_prop.css">
 </head>
 <body>
     <h2>Daftar Pengajuan Join Proposal</h2>
@@ -72,54 +72,54 @@ if ($isAdmin) {
         </select>
     </form>
 
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-                <th>ID Proposal</th>
-                <th>Nama Tim</th>
-                <th>Nama Member</th>
-                <th>Deskripsi</th>
-                <th>Status</th>
-                <th colspan="2">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $result->fetch_assoc()) : ?>
+    <div class="table-container">
+        <table>
+            <thead>
                 <tr>
-                    <td><?= $row['idjoin_proposal'] ?></td>
-                    <td><?= $row['team_name'] ?></td>
-                    <td><?= $row['member_name'] ?></td>
-                    <td><?= $row['description'] ?></td>
-                    <td><?= $row['status'] ?></td>
-                    <td>
-                        <?php if ($row['status'] === 'waiting') : ?>
-                            <form method="POST" action="">
-                                <input type="hidden" name="idjoin_proposal" value="<?= $row['idjoin_proposal'] ?>">
-                                <button type="submit" name="action" value="approve">Approve</button>
-                                <button type="submit" name="action" value="rejected">Reject</button>
-                            </form>
-                        <?php else : ?>
-                            Tidak Ada Aksi
-                        <?php endif; ?>
-                    </td>
+                    <th>ID Proposal</th>
+                    <th>Nama Tim</th>
+                    <th>Nama Member</th>
+                    <th>Deskripsi</th>
+                    <th>Status</th>
+                    <th colspan="2">Aksi</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php while ($row = $result->fetch_assoc()) : ?>
+                    <tr>
+                        <td data-label="ID Proposal"><?= $row['idjoin_proposal'] ?></td>
+                        <td data-label="Nama Tim"><?= $row['team_name'] ?></td>
+                        <td data-label="Nama Member"><?= $row['member_name'] ?></td>
+                        <td data-label="Deskripsi"><?= $row['description'] ?></td>
+                        <td data-label="Status"><?= $row['status'] ?></td>
+                        <td data-label="Aksi">
+                            <?php if ($row['status'] === 'waiting') : ?>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="idjoin_proposal" value="<?= $row['idjoin_proposal'] ?>">
+                                    <button type="submit" name="action" value="approve">Approve</button>
+                                    <button type="submit" name="action" value="rejected">Reject</button>
+                                </form>
+                            <?php else : ?>
+                                Tidak Ada Aksi
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 
-    <!-- PAGING -->
-    <br>
     <div class="pagination">
         <?php if ($page > 1): ?>
-            <a href="?status=<?php echo $status_filter; ?>&page=<?php echo $page - 1; ?>" class="disabled"><--Previous</a>
+            <a href="?status=<?= $status_filter; ?>&page=<?= $page - 1; ?>" class="disabled">&larr; Previous</a>
         <?php endif; ?>
 
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-            <a href="?status=<?php echo $status_filter; ?>&page=<?php echo $i; ?>" class="<?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+            <a href="?status=<?= $status_filter; ?>&page=<?= $i; ?>" class="<?= $i == $page ? 'active' : ''; ?>"><?= $i; ?></a>
         <?php endfor; ?>
 
         <?php if ($page < $total_pages): ?>
-            <a href="?status=<?php echo $status_filter; ?>&page=<?php echo $page + 1; ?>">Next--></a>
+            <a href="?status=<?= $status_filter; ?>&page=<?= $page + 1; ?>">Next &rarr;</a>
         <?php endif; ?>
     </div>
     <br>

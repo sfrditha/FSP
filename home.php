@@ -32,7 +32,7 @@ $koneksi->close();
     <h1>WELCOME!</h1>
 
     <div class="profile-container">
-        <img src="user.png" alt="Profile" class="profile-icon" onclick="toggleDropdown()">
+        <img src="img/user.png" alt="Profile" class="profile-icon" onclick="toggleDropdown()">
         <span class="dropdown-indicator" onclick="toggleDropdown()">▼</span> <!-- Dropdown indicator -->
         <div id="dropdown" style="display: none;">
             <ul>

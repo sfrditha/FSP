@@ -6,7 +6,6 @@ require_once 'event_class.php';
 $database = new Database();
 $koneksi = $database->getConnection();
 
-
 $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 
 $limit = 5;
@@ -42,20 +41,19 @@ $events = $event->getEvents($limit, $start);
 
     while ($row = $events->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>".$row['idevent']."</td>";
-        echo "<td>".$row['name']."</td>";
-        echo "<td>".$row['date']."</td>";
-        echo "<td>".$row['description']."</td>";
+        echo "<td data-label='ID Event'>".$row['idevent']."</td>";
+        echo "<td data-label='Nama Event'>".$row['name']."</td>";
+        echo "<td data-label='Tanggal'>".$row['date']."</td>";
+        echo "<td data-label='Deskripsi'>".$row['description']."</td>";
 
-        // Tombol hapus dan edit hanya ditampilkan untuk admin
         if ($isAdmin) {
-            echo "<td>
+            echo "<td data-label='Hapus'>
                     <form action='event_hapus.php' method='POST'>
                         <input type='hidden' name='idevent' value='".$row['idevent']."'>
                         <input type='submit' value='Hapus' class='btnHapus'>
                     </form>
                   </td>";
-            echo "<td>
+            echo "<td data-label='Edit'>
                     <a href='event_edit.php?idevent=".$row['idevent']."'>
                         <button>Edit</button>
                     </a>

@@ -1,8 +1,10 @@
 /* admin_style.css */
+
+/* Umum */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e1e;
-    color: white;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
     margin: 0;
     padding: 20px;
     text-align: center;
@@ -12,6 +14,7 @@ h2 {
     color: #ff2c2c;
 }
 
+/* Tabel */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -37,28 +40,24 @@ td {
     color: white;
 }
 
-/* Gaya untuk tombol aksi */
+/* Tombol Aksi */
 button {
-    border: none; /* Menghilangkan border */
-    padding: 8px 12px; /* Padding dalam tombol */
-    margin: 5px;
-    cursor: pointer; /* Mengubah kursor saat hover */
-    transition: background-color 0.3s; /* Efek transisi saat hover */
-}
-
-
-button:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-}
-
-/* Gaya untuk tombol hapus dengan warna merah */
-.btnHapus {
-    padding: 8px 12px;
-    background-color:#d32f2f; /* Red background for buttons */
-    color: white;
     border: none;
+    padding: 8px 12px;
+    margin: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.btnHapus {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
 }
 
 .btnHapus:hover {
@@ -66,7 +65,7 @@ button:hover {
     color: black;
 }
 
-/* Link kembali ke home */
+/* Link */
 a {
     text-decoration: none;
     color: #e53935;
@@ -74,76 +73,79 @@ a {
 
 a:hover {
     text-decoration: underline;
-
 }
 
-/* Responsif untuk layar yang lebih kecil */
-@media (max-width: 600px) {
-    table, table th, table td {
-        display: block;
-        width: 100%;
-    }
-
-    table th {
-        text-align: left;
-    }
-
-    table td {
-        text-align: right;
-        position: relative;
-        padding-left: 50%;
-    }
-
-    table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 15px;
-        font-weight: bold;
-        text-align: left;
-    }
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Pagination Styling */
+/* Pagination */
 .pagination {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
 .pagination a, .pagination span {
     color: white;
-    float: left;
     padding: 8px 16px;
     text-decoration: none;
     border: 1px solid red;
     margin: 0 4px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .pagination a {
-    background-color: black; /* Normal button background */
+    background-color: black;
 }
 
-.pagination a:hover {
-    background-color: red; /* Button on hover */
-    color: white;
-}
-
-.pagination .active {
+.pagination a:hover, .pagination .active {
     background-color: red;
     color: white;
-    border: 1px solid red;
 }
 
+/* Responsif untuk layar yang lebih kecil */
+@media (max-width: 768px) {
+    table, th, td {
+        display: block;
+        width: 100%;
+        border: none;
+    }
 
+    table tr {
+        margin-bottom: 15px;
+        display: block;
+        border-bottom: 1px solid red; /* Garis pembatas antar baris */
+        padding: 10px;
+    }
 
+    table td {
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #444; /* Garis pembatas antar data */
+    }
+
+    table td::before {
+        content: attr(data-label);
+        flex: 1;
+        font-weight: bold;
+        color: #ff2c2c; /* Warna label data */
+    }
+
+    th {
+        display: none; /* Sembunyikan header tabel */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    button, .btnHapus {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    table td {
+        border-bottom: 1px solid #555; /* Garis pembatas lebih terang untuk layar lebih kecil */
+    }
+}

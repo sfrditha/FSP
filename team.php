@@ -30,45 +30,52 @@ $result = $team->getTeams($start, $limit);
 </head>
 <body>
     <h2>TEAMS</h2>
-    <table border='1'>
-        <tr><th>ID Team</th><th>Game</th><th>Nama Team</th><th>Foto Team</th>
-        <?php if ($isAdmin) echo "<th colspan='4'>Aksi</th>"; ?>
-        </tr>
-
-        <?php while ($row = $result->fetch_assoc()): ?>
+    <table>
+        <thead>
             <tr>
-                <td><?php echo $row['idteam']; ?></td>
-                <td><?php echo $row['game']; ?></td>
-                <td><?php echo $row['name']; ?></td>
-                <!-- Buat foto -->
-                <td>
-                <img src="img/<?php echo $row['idteam']; ?>.jpg" alt="Team Photo" style="width: 100px; height: 50px;">
-                </td>
+                <th>ID Team</th>
+                <th>Game</th>
+                <th>Nama Team</th>
+                <th>Foto Team</th>
                 <?php if ($isAdmin): ?>
-                    <td>
-                        <form action="team_hapus.php" method="POST">
-                            <input type="hidden" name="idteam" value="<?php echo $row['idteam']; ?>">
-                            <input type="submit" value="Hapus" class="btnHapus">
-                        </form>
-                    </td>
-                    <td>
-                        <a href="team_edit.php?idteam=<?php echo $row['idteam']; ?>"><button>Edit</button></a>
-                    </td>
-                    <td>
-                        <form action="team_detail.php" method="POST">
-                            <input type="hidden" name="idteam" value="<?php echo $row['idteam']; ?>">
-                            <input type="submit" value="Detail" class="btnDetail">
-                        </form>
-                    </td>
+                    <th colspan="3">Aksi</th>
                 <?php endif; ?>
             </tr>
-        <?php endwhile; ?>
+        </thead>
+        <tbody>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td data-label="ID Team"><?php echo htmlspecialchars($row['idteam']); ?></td>
+                    <td data-label="Game"><?php echo htmlspecialchars($row['game']); ?></td>
+                    <td data-label="Nama Team"><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td data-label="Foto Team">
+                        <img src="img/<?php echo htmlspecialchars($row['idteam']); ?>.jpg" alt="Team Photo">
+                    </td>
+                    <?php if ($isAdmin): ?>
+                        <td data-label="Hapus">
+                            <form action="team_hapus.php" method="POST">
+                                <input type="hidden" name="idteam" value="<?php echo htmlspecialchars($row['idteam']); ?>">
+                                <input type="submit" value="Hapus" class="btnHapus">
+                            </form>
+                        </td>
+                        <td data-label="Edit">
+                            <a href="team_edit.php?idteam=<?php echo htmlspecialchars($row['idteam']); ?>"><button>Edit</button></a>
+                        </td>
+                        <td data-label="Detail">
+                            <form action="team_detail.php" method="POST">
+                                <input type="hidden" name="idteam" value="<?php echo htmlspecialchars($row['idteam']); ?>">
+                                <input type="submit" value="Detail" class="btnDetail">
+                            </form>
+                        </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
     </table>
 
-    <br>
     <div class="pagination">
         <?php if ($page > 1): ?>
-            <a href="?page=<?php echo $page - 1; ?>"><--Previous</a>
+            <a href="?page=<?php echo $page - 1; ?>">&larr; Previous</a>
         <?php endif; ?>
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
             <?php if ($i == $page): ?>
@@ -78,12 +85,12 @@ $result = $team->getTeams($start, $limit);
             <?php endif; ?>
         <?php endfor; ?>
         <?php if ($page < $total_pages): ?>
-            <a href="?page=<?php echo $page + 1; ?>">Next--></a>
+            <a href="?page=<?php echo $page + 1; ?>">Next &rarr;</a>
         <?php endif; ?>
     </div>
 
     <?php if ($isAdmin): ?>
-        <br><a href='team_insert.php'><button>Tambah Team</button></a>
+        <br><a href="team_insert.php"><button>Tambah Team</button></a>
     <?php endif; ?>
     <br><br><a href="home.php">Back To Home</a>
 </body>

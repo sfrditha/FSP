@@ -1,160 +1,170 @@
-/* admin_style.css */
+/* Gaya Global */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e1e;
-    color: white;
     margin: 0;
     padding: 20px;
+    background-color: #121212;
+    color: white;
     text-align: center;
 }
 
 h2 {
-    color: #ff2c2c;
+    color: #ff4757;
 }
 
+/* Tabel */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin: 20px auto;
 }
 
-table, th, td {
-    border: 1px solid red;
-}
-
-th, td {
-    padding: 15px;
-    text-align: center;
-}
-
-th {
+thead th {
     background-color: #333;
-    color: #ff2c2c;
+    color: #ff4757;
+    padding: 10px;
 }
 
-td {
-    background-color: #2b2b2b;
+tbody td {
+    background-color: #1e1e1e;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #444;
+}
+
+tbody td img {
+    max-width: 100px;
+    height: auto;
+}
+
+tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: none;
+}
+
+/* Tombol Aksi */
+button, .btnHapus, .btnDetail {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button {
+    background-color: #28a745;
     color: white;
 }
-
-/* Gaya untuk tombol aksi */
-button {
-    border: none; /* Menghilangkan border */
-    padding: 8px 12px; /* Padding dalam tombol */
-    margin: 5px;
-    cursor: pointer; /* Mengubah kursor saat hover */
-    transition: background-color 0.3s; /* Efek transisi saat hover */
-}
-
-a {
-    text-decoration: none;
-    color: #e53935;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-
 
 button:hover {
-    background-color: #d32f2f; /* Darker red on hover */
+    background-color: #218838;
 }
 
-/* Gaya untuk tombol hapus dengan warna merah */
 .btnHapus {
-    padding: 8px 12px;
-    background-color:#d32f2f; /* Red background for buttons */
+    background-color: #e74c3c;
     color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .btnHapus:hover {
-    background-color: white;
-    color: black;
+    background-color: #c0392b;
 }
 
 .btnDetail {
-    padding: 8px 12px;
-    background-color:#28a745; /* Red background for buttons */
+    background-color: #3498db;
     color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 .btnDetail:hover {
-    background-color: #d32f2f;
-    color: white;
+    background-color: #2980b9;
 }
 
-
-/* Responsif untuk layar yang lebih kecil */
-@media (max-width: 600px) {
-    table, table th, table td {
-        display: block;
-        width: 100%;
-    }
-
-    table th {
-        text-align: left;
-    }
-
-    table td {
-        text-align: right;
-        position: relative;
-        padding-left: 50%;
-    }
-
-    table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 15px;
-        font-weight: bold;
-        text-align: left;
-    }
-}
-
-/* Pagination Styling */
+/* Pagination */
 .pagination {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
 .pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 10px 15px;
     color: white;
-    float: left;
-    padding: 8px 16px;
     text-decoration: none;
-    border: 1px solid red;
-    margin: 0 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.pagination a {
-    background-color: black; /* Normal button background */
+    border: 1px solid #444;
 }
 
 .pagination a:hover {
-    background-color: red; /* Button on hover */
-    color: white;
+    background-color: #444;
 }
 
 .pagination .active {
-    background-color: red;
+    background-color: #ff4757;
     color: white;
-    border: 1px solid red;
+    border-color: #ff4757;
 }
 
+/* Responsif untuk layar yang lebih kecil */
+@media (max-width: 768px) {
+    table, th, td {
+        display: block;
+        width: 100%;
+        border: none;
+    }
 
+    table tr {
+        margin-bottom: 15px;
+        display: block;
+        border-bottom: 2px solid #ff2c2c; /* Garis pembatas antar baris */
+        padding: 10px;
+    }
 
+    table td {
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #444; /* Garis pembatas antar data */
+    }
 
+    table td::before {
+        content: attr(data-label);
+        flex: 1;
+        font-weight: bold;
+        color: #ff2c2c; /* Warna label data */
+        margin-right: 10px;
+    }
 
+    th {
+        display: none; /* Sembunyikan header tabel */
+    }
+}
 
+/* Responsif untuk layar lebih kecil (mobile) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
 
+    button, .btnHapus {
+        width: 100%;
+        margin-bottom: 5px;
+        padding: 12px;
+        font-size: 14px;
+    }
 
+    table td {
+        border-bottom: 1px solid #555; /* Garis pembatas lebih terang untuk layar kecil */
+    }
 
+    .pagination {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pagination a {
+        margin: 5px 0;
+        width: 100%;
+    }
+}

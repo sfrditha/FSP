@@ -1,4 +1,3 @@
-/* admin_style.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #1e1e1e;
@@ -37,46 +36,45 @@ td {
     color: white;
 }
 
-/* Gaya untuk tombol aksi */
-button {
-    border: none; /* Menghilangkan border */
-    padding: 8px 12px; /* Padding dalam tombol */
-    margin: 5px;
-    cursor: pointer; /* Mengubah kursor saat hover */
-    transition: background-color 0.3s; /* Efek transisi saat hover */
-}
-
-
-button:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-}
-
-/* Gaya untuk tombol hapus dengan warna merah */
-.btnHapus {
-    padding: 8px 12px;
-    background-color:#d32f2f; /* Red background for buttons */
+/* Tombol */
+button, .btnHapus {
+    background-color: #d32f2f;
     color: white;
     border: none;
+    padding: 8px 12px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-.btnHapus:hover {
-    background-color: white;
-    color: black;
+button:hover, .btnHapus:hover {
+    background-color: #b71c1c;
 }
-/* Link kembali ke home */
-a {
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+    color: white;
+    padding: 8px 16px;
     text-decoration: none;
-    color: #e53935;
+    border: 1px solid red;
+    margin: 0 4px;
+    transition: background-color 0.3s;
 }
 
-a:hover {
-    text-decoration: underline;
-
+.pagination a:hover {
+    background-color: red;
 }
 
-/* Responsif untuk layar yang lebih kecil */
+.pagination .active {
+    background-color: red;
+}
+
+/* Responsif */
 @media (max-width: 600px) {
     table, table th, table td {
         display: block;
@@ -84,7 +82,7 @@ a:hover {
     }
 
     table th {
-        text-align: left;
+        display: none;
     }
 
     table td {
@@ -96,54 +94,9 @@ a:hover {
     table td::before {
         content: attr(data-label);
         position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 15px;
+        left: 10px;
         font-weight: bold;
         text-align: left;
+        color: #ff2c2c;
     }
 }
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Pagination Styling */
-.pagination {
-    display: inline-block;
-    margin-top: 20px;
-}
-
-.pagination a, .pagination span {
-    color: white;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 1px solid red;
-    margin: 0 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.pagination a {
-    background-color: black; /* Normal button background */
-}
-
-.pagination a:hover {
-    background-color: red; /* Button on hover */
-    color: white;
-}
-
-.pagination .active {
-    background-color: red;
-    color: white;
-    border: 1px solid red;
-}
-
-
-
-

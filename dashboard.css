@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.join-now-btn {
+    background-color: #e53935; /* Red background for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.join-now-btn:hover {
+    background-color:#333; /* Darker red on hover */
+    color: #e53935;
+}
+
+/* Header */
+.header {
+    background-color: #333;
+    color: #ff2c2c;
+    padding: 20px 0;
+    position: relative;
+    display: flex;
+    justify-content: space-between; /* Aligns logo to left and nav to right */
+    align-items: center; /* Vertically center the content */
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Align the navigation links to the right */
+    margin: 0;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav ul li a:hover {
+    color: #f00;
+}
+
+/* Toggle Menu */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.menu-toggle:hover{
+    color: #e53935;
+}
+
+.menu-toggle.active ~ .nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav ul {
+    transition: all 0.3s ease;
+}
+
+
+/* Sections */
+section {
+    padding: 50px 20px;
+    background-color: #1e1e1e;
+    
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align the content to the right */
+    gap: 20px;
+    background: #f4f4f4;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-image {
+    flex: 1;
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-content {
+    flex: 1;
+    max-width: 50%;
+    text-align: left;
+}
+
+.about-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #111;
+}
+
+.about-content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.about-content .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #f00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.about-content .btn:hover {
+    background: #c00;
+}
+
+.teams, .matches, .news {
+    text-align: center;
+}
+
+h2, p{
+    color: #fff;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.team {
+
+    background-color: rgba(70, 70, 70, 0.8); /* Semi-transparent background */
+    border: 2px solid rgba(255, 255, 255, 0.8); /* White outline */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.team img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.team h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #e53935;
+    text-align: center;
+}
+
+.team p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.team .btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #f00;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.team .btn:hover {
+    background: #c00;
+}
+
+.matches ul {
+    list-style: none;
+    padding: 0;
+}
+
+.matches ul li {
+    background: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Footer */
+.footer {
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer .social-icons a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer .social-icons a:hover {
+    color: #f00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background: #111;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: 0;
+        padding: 20px;
+    }
+
+    .nav ul li {
+        margin: 10px 0;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .about {
+        flex-direction: column;
+    }
+
+    .about-image, .about-content {
+        max-width: 100%;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .footer {
+        font-size: 14px;
+    }
+}

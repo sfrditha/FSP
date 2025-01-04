@@ -43,19 +43,18 @@ $games = $game->getGames($limit, $start);
 
     while ($row = $games->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>".$row['idgame']."</td>";
-        echo "<td>".$row['name']."</td>";
-        echo "<td>".$row['description']."</td>";
+        echo "<td data-label='ID Game'>".$row['idgame']."</td>";
+        echo "<td data-label='Nama Game'>".$row['name']."</td>";
+        echo "<td data-label='Deskripsi'>".$row['description']."</td>";
 
-        // Tombol hapus dan edit hanya ditampilkan untuk admin
         if ($isAdmin) {
-            echo "<td>
+            echo "<td data-label='Hapus'>
                     <form action='game_hapus.php' method='POST'>
                         <input type='hidden' name='idgame' value='".$row['idgame']."'>
                         <input type='submit' value='Hapus' class='btnHapus'>
                     </form>
                   </td>";
-            echo "<td>
+            echo "<td data-label='Edit'>
                     <a href='game_edit.php?idgame=".$row['idgame']."'>
                         <button>Edit</button>
                     </a>
