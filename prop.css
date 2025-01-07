@@ -1,0 +1,72 @@
+body {
+    /* ... existing code ... */
+    display: flex; /* Menambahkan flexbox */
+    flex-direction: column; /* Mengatur arah flex menjadi kolom */
+    align-items: center; /* Memusatkan elemen secara horizontal */
+    justify-content: flex-start; /* Mengatur elemen agar berada di atas */
+    min-height: 100vh; /* Memastikan body memenuhi tinggi viewport */
+    margin: 0; /* Menghapus margin default */
+    background-color: #121212; /* Latar belakang gelap */
+    color: white; /* Warna teks putih */
+}
+
+h2 {
+    /* ... existing code ... */
+    color: #ff4757; /* Warna judul merah cerah */
+    margin-bottom: 20px; /* Jarak bawah untuk pemisahan */
+}
+
+.proposal-container {
+    /* ... existing code ... */
+    display: flex; /* Menambahkan flexbox */
+    flex-direction: column; /* Mengatur arah flex menjadi kolom */
+    align-items: center; /* Memusatkan elemen secara horizontal */
+    width: 100%; /* Memastikan lebar penuh */
+}
+
+.proposal-card {
+    /* ... existing code ... */
+    background-color: #1e1e1e; /* Latar belakang kartu proposal */
+    border: 1px solid #444; /* Warna border lebih gelap */
+    margin: 10px 0; /* Jarak antar kartu proposal */
+    padding: 15px; /* Padding dalam kartu proposal */
+    width: 80%; /* Lebar kartu proposal */
+}
+
+.action-buttons {
+    /* ... existing code ... */
+    display: flex; /* Menambahkan flexbox */
+    justify-content: center; /* Memusatkan tombol secara horizontal */
+    gap: 10px; /* Menambahkan jarak antar tombol */
+    margin-top: 20px; /* Menambahkan jarak atas untuk pemisahan */
+}
+
+.register-team-button {
+    /* ... existing code ... */
+    background-color: #3498db; /* Ubah warna tombol ajukan tim baru sesuai timm.css */
+    color: white; /* Warna teks putih */
+    padding: 10px 15px; /* Padding untuk tombol */
+    border: none; /* Menghapus border default */
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+    cursor: pointer; /* Menunjukkan bahwa ini adalah tombol yang dapat diklik */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+
+.register-team-button:hover {
+    background-color: #2980b9; /* Warna saat hover */
+}
+
+.back-button {
+    /* ... existing code ... */
+    background-color: #e74c3c; /* Ubah warna tombol kembali sesuai timm.css */
+    color: white; /* Warna teks putih */
+    padding: 10px 15px; /* Padding untuk tombol */
+    border: none; /* Menghapus border default */
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+    cursor: pointer; /* Menunjukkan bahwa ini adalah tombol yang dapat diklik */
+    transition: background-color 0.3s; /* Efek transisi saat hover */
+}
+
+.back-button:hover {
+    background-color: #c0392b; /* Warna saat hover */
+}

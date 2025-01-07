@@ -1,0 +1,149 @@
+/* Gaya Global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Latar belakang gelap */
+    color: white; /* Warna teks putih */
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #ff4757; /* Warna judul merah cerah */
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    color: #ff4757; /* Warna header tabel */
+}
+
+td {
+    background-color: #1e1e1e;
+    color: white;
+    border: 1px solid #444; /* Warna border lebih gelap */
+}
+
+/* Tombol Aksi */
+button, .btnHapus {
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px; /* Membuat sudut tombol melengkung */
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.btnHapus {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btnHapus:hover {
+    background-color: #c0392b;
+}
+
+/* Link */
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid #444;
+    margin: 0 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a {
+    background-color: #1e1e1e;
+}
+
+.pagination a:hover, .pagination .active {
+    background-color: #ff4757;
+    color: white;
+}
+
+/* Responsif untuk layar yang lebih kecil */
+@media (max-width: 768px) {
+    table, th, td {
+        display: block;
+        width: 100%;
+        border: none;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+        display: block;
+        border-bottom: 2px solid #ff2c2c; /* Garis pembatas antar baris */
+        padding: 10px;
+    }
+
+    table td {
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #444; /* Garis pembatas antar data */
+    }
+
+    table td::before {
+        content: attr(data-label);
+        flex: 1;
+        font-weight: bold;
+        color: #ff2c2c; /* Warna label data */
+    }
+
+    th {
+        display: none; /* Sembunyikan header tabel */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    button, .btnHapus {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    table td {
+        border-bottom: 1px solid #555; /* Garis pembatas lebih terang untuk layar lebih kecil */
+    }
+}

@@ -3,13 +3,16 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #121212;
-    color: white;
+    background-color: #121212; /* Latar belakang gelap */
+    color: white; /* Warna teks putih */
     text-align: center;
 }
 
+/* Judul */
 h2 {
-    color: #ff4757;
+    color: #ff4757; /* Warna judul merah cerah */
+    font-size: 24px; /* Ukuran font yang sama */
+    margin-bottom: 20px; /* Jarak bawah untuk pemisahan */
 }
 
 /* Tabel */
@@ -21,8 +24,10 @@ table {
 
 thead th {
     background-color: #333;
-    color: #ff4757;
-    padding: 10px;
+    color: #ff4757; /* Warna header tabel */
+    padding: 10px; /* Padding yang sama */
+    font-size: 16px; /* Ukuran font yang sama */
+    text-align: center; /* Penyelarasan teks */
 }
 
 tbody td {

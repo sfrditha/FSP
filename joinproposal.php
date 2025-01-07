@@ -57,7 +57,7 @@ if ($isAdmin) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Kelola Join Proposal</title>
-    <link rel="stylesheet" type="text/css" href="admin_prop.css">
+    <link rel="stylesheet" type="text/css" href="adm_prop.css">
 </head>
 <body>
     <h2>Daftar Pengajuan Join Proposal</h2>

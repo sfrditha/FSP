@@ -1,0 +1,49 @@
+body {
+    /* ... existing code ... */
+    background-color: #121212; /* Ubah latar belakang menjadi gelap */
+    color: white; /* Ubah warna teks menjadi putih */
+}
+
+h2 {
+    /* ... existing code ... */
+    color: #ff4757; /* Ubah warna judul menjadi merah cerah */
+}
+
+.proposal-card {
+    /* ... existing code ... */
+    background-color: #1e1e1e; /* Ubah latar belakang kartu proposal */
+    border: 1px solid #444; /* Ubah warna border menjadi lebih gelap */
+}
+
+.proposal-card h3 {
+    /* ... existing code ... */
+    color: #ff4757; /* Ubah warna judul dalam kartu proposal */
+}
+
+.status.pending {
+    /* ... existing code ... */
+    color: #856404; /* Warna status pending */
+    background-color: #fff3cd; /* Latar belakang status pending */
+}
+
+.status.approved {
+    /* ... existing code ... */
+    color: #155724; /* Warna status approved */
+    background-color: #d4edda; /* Latar belakang status approved */
+}
+
+.status.rejected {
+    /* ... existing code ... */
+    color: #721c24; /* Warna status rejected */
+    background-color: #f8d7da; /* Latar belakang status rejected */
+}
+
+.register-team-button {
+    /* ... existing code ... */
+    background-color: #3498db; /* Ubah warna tombol ajukan tim baru */
+}
+
+.back-button {
+    /* ... existing code ... */
+    background-color: #e74c3c; /* Ubah warna tombol kembali */
+}

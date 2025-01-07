@@ -26,7 +26,7 @@ $result = $team->getTeams($start, $limit);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teams</title>
-    <link rel="stylesheet" href="timm.css">
+    <link rel="stylesheet" href="tiimm.css">
 </head>
 <body>
     <h2>TEAMS</h2>
