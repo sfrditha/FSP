@@ -145,12 +145,27 @@ class JoinProposal {
     public function getTeams($idmember){
         $sql = "SELECT t.idteam, t.name
                 FROM team t
-                LEFT JOIN team_members m ON t.idteam = m.idteam AND m.idmember = ?
-                WHERE m.idteam IS NULL;";
+                LEFT JOIN join_proposal jp ON t.idteam = jp.idteam AND jp.idmember = ?
+                WHERE jp.idjoin_proposal IS NULL OR jp.status = 'rejected'";    
         $result = $this->koneksi->prepare($sql);
         $result->bind_param("i", $idmember);
         $result->execute();
         return $result->get_result();
     }
+
+    public function getProposalsByMember($idmember) {
+        $sql = "SELECT jp.idjoin_proposal, jp.description, jp.status, 
+                       t.name AS team_name, g.name AS game_name 
+                FROM join_proposal jp
+                JOIN team t ON jp.idteam = t.idteam
+                JOIN game g ON t.idgame = g.idgame
+                WHERE jp.idmember = ?";
+                
+        $stmt = $this->koneksi->prepare($sql);
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    
 }
 ?>

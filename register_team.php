@@ -10,20 +10,20 @@ $idmember = isset($_SESSION['idmember']) ? $_SESSION['idmember'] : 0;
 if ($idmember > 0) {
     $existingProposal = $joinProposal->memberStatus($idmember);
     
-    if ($existingProposal->num_rows > 0) {
-        $row = $existingProposal->fetch_assoc();
-        $status = $row['status'];
+    // if ($existingProposal->num_rows > 0) {
+    //     $row = $existingProposal->fetch_assoc();
+    //     $status = $row['status'];
         
-        if ($status === 'waiting') {
-            echo "<p>Pengajuan Anda masih dalam status <b>'waiting'</b>. Harap tunggu persetujuan.</p>";
-            echo "<a href='home.php'>Kembali ke Beranda</a>";
-            exit();
-        } elseif ($status === 'approved') {
-            echo "<p>Pengajuan Anda  sebelumnya telah <b>'Diterima'</b>. Anda sekarang anggota tim.</p>";
-        } elseif ($status === 'rejected') {
-            echo "<p>Pengajuan Anda telah <b>'Ditolak'</b>. Silakan ajukan ke tim lain atau perbarui permintaan.</p>";
-        }
-    }
+    //     if ($status === 'waiting') {
+    //         echo "<p>Pengajuan Anda masih dalam status <b>'waiting'</b>. Harap tunggu persetujuan.</p>";
+    //         echo "<a href='home.php'>Kembali ke Beranda</a>";
+    //         exit();
+    //     } elseif ($status === 'approved') {
+    //         echo "<p>Pengajuan Anda  sebelumnya telah <b>'Diterima'</b>. Anda sekarang anggota tim.</p>";
+    //     } elseif ($status === 'rejected') {
+    //         echo "<p>Pengajuan Anda telah <b>'Ditolak'</b>. Silakan ajukan ke tim lain atau perbarui permintaan.</p>";
+    //     }
+    // }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($idteam > 0) {
         $affectedRows = $joinProposal->insertJoinProposal($idteam, $idmember, $description, $status);
         if ($affectedRows > 0) {
-            header("Location: home.php");
+            header("Location: proposal.php");
             exit();
         } else {
             echo "Registrasi tim gagal.";

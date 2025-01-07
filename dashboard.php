@@ -1,10 +1,28 @@
+<?php
+require_once 'database.php';
+require_once 'team_class.php';
+require_once 'event_class.php';
+
+// Membuat koneksi ke database
+$dbConnection = new Database();
+$db = $dbConnection->getConnection();
+
+// Membuat instance class Team dan Event
+$team = new Team($db);
+$event = new Event($db);
+
+// Mendapatkan semua data tim dan event dari database
+$teams = $team->getTeamsFull();
+$events = $event->getAllEvents();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esports Home</title>
-    <link rel="stylesheet" href="front.css">
+    <title>Esports Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -16,20 +34,21 @@
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#teams">Teams</a></li>
+                    <li><a href="#matches">Matches</a></li>
+                    <li><a href="#news">News</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <!-- About Section -->
-    <section class="about">
+    <section id="about" class="about">
         <div class="about-image">
             <img src="img/11.jpg" alt="About Us Image" style="width: 100%; border-radius: 10px;">
         </div>
         <div class="about-content">
             <h2>About Us</h2>
             <p>We bring you the latest updates and thrilling events from the world of esports. Join us as we explore the passion, excitement, and community of gamers worldwide.</p>
-            <!-- Join Now Button -->
             <a href="#join" class="join-now-btn">Join Now</a>
         </div>
     </section>
@@ -41,22 +60,13 @@
                 <h2>Our Teams</h2>
             </div>
             <div class="team-grid">
-                <div class="team">
-                    <img src="img/1.jpg" alt="Valorant">
-                    <h3>Team Valorant</h3>
-                </div>
-                <div class="team">
-                    <img src="img/2.jpg" alt="Dota2">
-                    <h3>Team Dota 2</h3>
-                </div>
-                <div class="team">
-                    <img src="img/4.jpg" alt="RocketLeauge">
-                    <h3>Team Rocket Leauge</h3>
-                </div>
-                <div class="team">
-                    <img src="img/5.jpg" alt="Pubg">
-                    <h3>Team Pubg</h3>
-                </div>
+                <?php while ($row = $teams->fetch_assoc()): ?>
+                    <div class="team">
+                        <img src="img/<?= htmlspecialchars($row['idteam']) ?>.jpg" alt="<?= htmlspecialchars($row['name']) ?>" onerror="this.src='img/default.jpg';">
+                        <h3><?= htmlspecialchars($row['name']) ?></h3>
+                        <p>Game: <?= htmlspecialchars($row['game']) ?></p>
+                    </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </section>
@@ -66,8 +76,14 @@
         <div class="container">
             <h2>Schedule</h2>
             <ul>
-                <li>Team Alpha vs Team Bravo - Jan 15, 2024</li>
-                <li>Team Delta vs Team Omega - Jan 18, 2024</li>
+                <?php while ($eventRow = $events->fetch_assoc()): ?>
+                    <li>
+                        <strong><?= htmlspecialchars($eventRow['name']) ?></strong> - 
+                        <?= htmlspecialchars($eventRow['date']) ?> 
+                        <br>
+                        <span><?= htmlspecialchars($eventRow['description']) ?></span>
+                    </li>
+                <?php endwhile; ?>
             </ul>
         </div>
     </section>
@@ -83,6 +99,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <p>&copy; 2024 DOLA DOLA Esports. All rights reserved.</p>
         </div>
     </footer>
 

@@ -55,7 +55,7 @@ $koneksi->close();
         <!-- MEMBER -->
         <?php if ($role === 'member'): ?>
         <div class="card">
-            <a href="register_team.php">
+            <a href="proposal.php">
                 <div class="card-content">
                     <h2>JOIN-PROPOSAL</h2>
                 </div>
@@ -90,7 +90,7 @@ $koneksi->close();
             </a>
         </div>
         <div class="card">
-            <a href="register_team.php">
+            <a href="proposal.php">
                 <div class="card-content">
                     <h2>JOIN-PROPOSAL</h2>
                 </div>

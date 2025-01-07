@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.proposal-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.proposal-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px;
+}
+
+.proposal-card h3 {
+    margin: 0 0 10px;
+    color: #007bff;
+    font-size: 1.2em;
+}
+
+.proposal-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.status {
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.status.pending {
+    color: #856404;
+    background-color: #fff3cd;
+}
+
+.status.approved {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.status.rejected {
+    color: #721c24;
+    background-color: #f8d7da;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.register-team-button,
+.back-button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.register-team-button {
+    background-color: #28a745;
+    color: #fff;
+    font-weight: bold;
+}
+
+.register-team-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.back-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}

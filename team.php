@@ -49,7 +49,7 @@ $result = $team->getTeams($start, $limit);
                     <td data-label="Game"><?php echo htmlspecialchars($row['game']); ?></td>
                     <td data-label="Nama Team"><?php echo htmlspecialchars($row['name']); ?></td>
                     <td data-label="Foto Team">
-                        <img src="img/<?php echo htmlspecialchars($row['idteam']); ?>.jpg" alt="Team Photo">
+                        <img src="img/<?php echo htmlspecialchars($row['idteam']); ?>.jpg?<?php echo file_exists('img/' . htmlspecialchars($row['idteam']) . '.jpg') ? filemtime('img/' . htmlspecialchars($row['idteam']) . '.jpg') : time(); ?>" alt="Team Photo">
                     </td>
                     <?php if ($isAdmin): ?>
                         <td data-label="Hapus">

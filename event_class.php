@@ -93,5 +93,11 @@ class Event {
 		$stmt->execute();
         return $stmt->affected_rows;
     }
+
+    public function getAllEvents() {
+        $sql = "SELECT * FROM event";
+        $result = $this->koneksi->query($sql);
+        return $result;
+    }
 }
 ?>

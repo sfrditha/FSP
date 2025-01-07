@@ -17,6 +17,13 @@ if (isset($_POST['submit'])) {
     $idteam = $_POST['idteam'];
     $idgame = $_POST['idgame'];
     $team_name = $_POST['name'];
+    $photo = $_FILES['photo'];
+
+    if ($photo['error'] === UPLOAD_ERR_OK) {
+        $targetDir = 'img/';
+        $targetFile = $targetDir . $idteam . '.jpg';
+        move_uploaded_file($photo['tmp_name'], $targetFile);
+    }
 
     $team->updateTeam($idgame, $team_name, $idteam);
     $koneksi->close();
@@ -28,11 +35,21 @@ if (isset($_POST['submit'])) {
 <head>
     <title>Edit Team</title>
     <link rel="stylesheet" href="timAdEditt.css">
+    <script>
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('team-photo-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </head>
 <body>
     <h2>EDIT TEAM</h2>
 
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="idteam" value="<?php echo $row['idteam']; ?>">
 
         <label for="idgame">Game:</label><br>
@@ -50,6 +67,13 @@ if (isset($_POST['submit'])) {
 
         <label for="name">Team Name:</label><br>
         <input type="text" name="name" value="<?php echo $row['name']; ?>"><br><br>
+
+        <label for="photo">Team Photo:</label><br>
+        <input type="file" name="photo" onchange="previewImage(event)"><br><br>
+        <img id="team-photo-preview" src="img/<?php echo htmlspecialchars($row['idteam']); ?>.jpg?<?php echo 
+        file_exists('img/' . htmlspecialchars($row['idteam']) . '.jpg') ? 
+        filemtime('img/' . htmlspecialchars($row['idteam']) . '.jpg') : time(); ?>" 
+        alt="Team Photo" style="max-width: 200px;"><br><br>
 
         <input type="submit" name="submit" value="Update">
     </form>
