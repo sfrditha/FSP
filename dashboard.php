@@ -18,12 +18,14 @@ $events = $event->getAllEvents();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esports Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body>
     <!-- Header Section -->
     <header class="header">
@@ -48,8 +50,9 @@ $events = $event->getAllEvents();
         </div>
         <div class="about-content">
             <h2>About Us</h2>
-            <p>We bring you the latest updates and thrilling events from the world of esports. Join us as we explore the passion, excitement, and community of gamers worldwide.</p>
-            <a href="#join" class="join-now-btn">Join Now</a>
+            <p>We bring you the latest updates and thrilling events from the world of esports. Join us as we explore the
+                passion, excitement, and community of gamers worldwide.</p>
+            <a href="login.php" class="join-now-btn">Join Now</a>
         </div>
     </section>
 
@@ -62,9 +65,20 @@ $events = $event->getAllEvents();
             <div class="team-grid">
                 <?php while ($row = $teams->fetch_assoc()): ?>
                     <div class="team">
-                        <img src="img/<?= htmlspecialchars($row['idteam']) ?>.jpg" alt="<?= htmlspecialchars($row['name']) ?>" onerror="this.src='img/default.jpg';">
-                        <h3><?= htmlspecialchars($row['name']) ?></h3>
-                        <p>Game: <?= htmlspecialchars($row['game']) ?></p>
+                        <img src="img/<?= htmlspecialchars($row['idteam']) ?>.jpg"
+                            alt="<?= htmlspecialchars($row['name']) ?>" onerror="this.src='img/default.jpg';">
+                        <!-- Membuat nama tim menjadi hyperlink -->
+                        <h3>
+                            <a href="details.php?id=<?= htmlspecialchars($row['idteam']) ?>"
+                                style="color: red; text-decoration: underline;">
+                                <?= htmlspecialchars($row['name']) ?>
+                            </a>
+                        </h3>
+
+                        <p onclick="location.href='dash_details.php?game=<?= urlencode($row['game']) ?>'"
+                            style="cursor: pointer; color: white; text-decoration: underline;">
+                            Game: <?= htmlspecialchars($row['game']) ?>
+                        </p>
                     </div>
                 <?php endwhile; ?>
             </div>
@@ -78,8 +92,8 @@ $events = $event->getAllEvents();
             <ul>
                 <?php while ($eventRow = $events->fetch_assoc()): ?>
                     <li>
-                        <strong><?= htmlspecialchars($eventRow['name']) ?></strong> - 
-                        <?= htmlspecialchars($eventRow['date']) ?> 
+                        <strong><?= htmlspecialchars($eventRow['name']) ?></strong> -
+                        <?= htmlspecialchars($eventRow['date']) ?>
                         <br>
                         <span><?= htmlspecialchars($eventRow['description']) ?></span>
                     </li>
@@ -105,10 +119,11 @@ $events = $event->getAllEvents();
 
     <!-- JavaScript for Toggle Menu -->
     <script>
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
             this.classList.toggle('active');
             document.querySelector('.nav ul').classList.toggle('active');
         });
     </script>
 </body>
+
 </html>

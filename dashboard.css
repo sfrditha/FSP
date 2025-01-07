@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 /* General Styles */
 body {
     margin: 0;
@@ -25,7 +26,7 @@ body {
 }
 
 .join-now-btn:hover {
-    background-color:#333; /* Darker red on hover */
+    background-color: #333; /* Darker red on hover */
     color: #e53935;
 }
 
@@ -79,7 +80,7 @@ body {
     top: 15px;
 }
 
-.menu-toggle:hover{
+.menu-toggle:hover {
     color: #e53935;
 }
 
@@ -93,12 +94,10 @@ body {
     transition: all 0.3s ease;
 }
 
-
 /* Sections */
 section {
     padding: 50px 20px;
     background-color: #1e1e1e;
-    
 }
 
 .about {
@@ -159,7 +158,7 @@ section {
     text-align: center;
 }
 
-h2, p{
+h2, p {
     color: #fff;
 }
 
@@ -170,7 +169,6 @@ h2, p{
 }
 
 .team {
-
     background-color: rgba(70, 70, 70, 0.8); /* Semi-transparent background */
     border: 2px solid rgba(255, 255, 255, 0.8); /* White outline */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow effect */
@@ -199,15 +197,17 @@ h2, p{
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0;
-    color: #e53935;
+    color: #e53935; /* Red team name */
     text-align: center;
+    text-decoration: none; /* Remove underline */
 }
 
 .team p {
     font-size: 16px;
-    color: #666;
+    color: #fff; /* White game name */
     text-align: center;
     margin-bottom: 10px;
+    text-decoration: none; /* Remove underline */
 }
 
 .team .btn {
