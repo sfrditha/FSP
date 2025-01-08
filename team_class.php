@@ -131,11 +131,20 @@ class Team {
 
     // Get all teams without pagination
     public function getTeamsFull() {
-        $sql = "SELECT t.idteam, g.name as game, t.name
+        $sql = "SELECT t.idteam, g.name as game, t.name, g.idgame as id_game
                 FROM game g INNER JOIN team t ON g.idgame = t.idgame";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->get_result();
     }
+
+    public function getTeamsByGame($game) {
+        $query = "SELECT * FROM team WHERE idgame = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $game);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    
 }
 ?>

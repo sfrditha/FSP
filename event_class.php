@@ -99,5 +99,18 @@ class Event {
         $result = $this->koneksi->query($sql);
         return $result;
     }
+
+    public function getEventsByGame($id_game) {
+        $query ="SELECT e.* 
+                FROM event e
+                INNER JOIN event_teams et on e.idevent=et.idevent
+                INNER JOIN team t ON et.idteam = t.idteam
+                WHERE t.idgame = ?";
+        $stmt = $this->koneksi->prepare($query);
+        $stmt->bind_param("i", $id_game);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    
 }
 ?>

@@ -1,7 +1,9 @@
 <?php
-session_start(); 
+session_start();
+require_once 'database.php';  
 
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+$database = new Database();
+$koneksi = $database->getConnection();
 
 if ($koneksi->connect_errno) {
     die("Koneksi ke Database Failed: " . $koneksi->connect_errno);

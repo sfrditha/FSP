@@ -59,23 +59,19 @@ $events = $event->getAllEvents();
     <!-- Teams Section -->
     <section id="teams" class="teams">
         <div class="container">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <h2>Our Teams</h2>
-            </div>
+            <h2>Our Teams</h2>
             <div class="team-grid">
                 <?php while ($row = $teams->fetch_assoc()): ?>
                     <div class="team">
                         <img src="img/<?= htmlspecialchars($row['idteam']) ?>.jpg"
                             alt="<?= htmlspecialchars($row['name']) ?>" onerror="this.src='img/default.jpg';">
-                        <!-- Membuat nama tim menjadi hyperlink -->
                         <h3>
-                            <a href="details.php?id=<?= htmlspecialchars($row['idteam']) ?>"
+                            <a href="details.php?id=<?= urlencode($row['idteam']) ?>" 
                                 style="color: red; text-decoration: underline;">
                                 <?= htmlspecialchars($row['name']) ?>
                             </a>
                         </h3>
-
-                        <p onclick="location.href='dash_details.php?game=<?= urlencode($row['game']) ?>'"
+                        <p onclick="location.href='dash_details.php?id_game=<?= urlencode($row['id_game']) ?>'"
                             style="cursor: pointer; color: white; text-decoration: underline;">
                             Game: <?= htmlspecialchars($row['game']) ?>
                         </p>
@@ -92,8 +88,7 @@ $events = $event->getAllEvents();
             <ul>
                 <?php while ($eventRow = $events->fetch_assoc()): ?>
                     <li>
-                        <strong><?= htmlspecialchars($eventRow['name']) ?></strong> -
-                        <?= htmlspecialchars($eventRow['date']) ?>
+                        <strong><?= htmlspecialchars($eventRow['name']) ?></strong> - <?= htmlspecialchars($eventRow['date']) ?>
                         <br>
                         <span><?= htmlspecialchars($eventRow['description']) ?></span>
                     </li>

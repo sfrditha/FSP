@@ -73,6 +73,18 @@ class Game {
         $stmt->execute(); // Eksekusi statement
         return $stmt->affected_rows; // Kembalikan jumlah baris yang terpengaruh
     }
+
+    public function getGameByTeam($idteam) {
+        $sql = "SELECT g.* 
+                FROM game g
+                INNER JOIN  team t on g.idgame=t.idgame
+                WHERE t.idteam = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("i", $idteam);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    
     
 }
 ?>

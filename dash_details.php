@@ -1,37 +1,37 @@
 <?php
-// Data tim dan event statis
-$game = [
-    'Valorant' => ['Valorant Vipers', 'Valorant Assassins'],
-    'Dota 2' => ['Dota Destroyers', 'Radiant Warriors'],
-    'Counter-Strike: Global Offensive' => ['CSGO Sharpshooters', 'Global Tacticians'],
-    'Rocket League' => ['Rocket Racers', 'Boost Blasters']
-];
+require_once 'database.php';
+require_once 'team_class.php';
+require_once 'event_class.php';
+require_once 'game_class.php';
 
-$eventsData = [
-    'Valorant' => [
-        ['name' => 'Valorant Invitational', 'date' => '2024-05-10', 'description' => 'A showdown of top Valorant teams.'],
-        ['name' => 'Global Valorant Cup', 'date' => '2024-06-15', 'description' => 'Worldwide Valorant championship.']
-    ],
-    'Dota 2' => [
-        ['name' => 'Dota Major League', 'date' => '2024-07-20', 'description' => 'Major Dota 2 teams competing.'],
-        ['name' => 'Radiant Showdown', 'date' => '2024-08-05', 'description' => 'Clash of legends in Dota 2.']
-    ],
-    'Counter-Strike: Global Offensive' => [
-        ['name' => 'CSGO World Series', 'date' => '2024-09-12', 'description' => 'The ultimate CSGO tournament.'],
-        ['name' => 'Global Offensive Open', 'date' => '2024-10-01', 'description' => 'An open tournament for rising stars.']
-    ],
-    'Rocket League' => [
-        ['name' => 'Rocket League Grand Prix', 'date' => '2024-11-18', 'description' => 'Intense rocket-powered action.'],
-        ['name' => 'Aerial Supremacy Cup', 'date' => '2024-12-03', 'description' => 'High-flying Rocket League excitement.']
-    ]
-];
+// Membuat koneksi ke database
+$dbConnection = new Database();
+$db = $dbConnection->getConnection();
+
+// Membuat instance Team dan Event
+$team = new Team($db);
+$event = new Event($db);
+$game = new Game($db);
 
 // Mendapatkan parameter game dari URL
-$game = isset($_GET['game']) ? $_GET['game'] : '';
+$id_game = isset($_GET['id_game']) ? (int) $_GET['id_game'] : 0;
 
-// Memastikan data game yang diminta tersedia
-$teams = isset($teamsData[$game]) ? $teamsData[$game] : [];
-$events = isset($eventsData[$game]) ? $eventsData[$game] : [];
+if (empty($id_game)) {
+    die('Game parameter is missing.');
+}
+
+// Ambil game berdasarkan id_game
+$games1 = $game->getGame($id_game);
+$games =  $games1->fetch_assoc();
+
+// Validasi jika game tidak ditemukan
+if (!$games) {
+    die('Game not found.');
+}
+
+// Ambil tim dan event berdasarkan id_game
+$teams = $team->getTeamsByGame($id_game);
+$events = $event->getEventsByGame($id_game);
 ?>
 
 <!DOCTYPE html>
@@ -40,41 +40,38 @@ $events = isset($eventsData[$game]) ? $eventsData[$game] : [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($game) ?> Details</title>
+    <title><?= htmlspecialchars($games['name']) ?> Details</title>
     <link rel="stylesheet" href="dash_details.css">
 </head>
 
 <body>
-    <!-- Main Content -->
     <main class="details">
         <div class="container">
-            <h1><?= htmlspecialchars($game) ?> - Details</h1>
+            <h1><?= htmlspecialchars($games['name']) ?> - Details</h1>
 
-            <!-- Teams Section -->
             <section id="teams" class="team-details">
                 <h2>Teams</h2>
-                <?php if (!empty($teams)): ?>
+                <?php if ($teams->num_rows > 0): ?>
                     <ul>
-                        <?php foreach ($teams as $team): ?>
-                            <li><strong><?= htmlspecialchars($team) ?></strong></li>
-                        <?php endforeach; ?>
+                        <?php while ($teamRow = $teams->fetch_assoc()): ?>
+                            <li><strong><?= htmlspecialchars($teamRow['name']) ?></strong></li>
+                        <?php endwhile; ?>
                     </ul>
                 <?php else: ?>
                     <p>No teams found for this game.</p>
                 <?php endif; ?>
             </section>
 
-            <!-- Events Section -->
             <section id="events" class="event-details">
                 <h2>Events</h2>
-                <?php if (!empty($events)): ?>
+                <?php if ($events->num_rows > 0): ?>
                     <ul>
-                        <?php foreach ($events as $event): ?>
+                        <?php while ($eventRow = $events->fetch_assoc()): ?>
                             <li>
-                                <strong><?= htmlspecialchars($event['name']) ?></strong> - <?= htmlspecialchars($event['date']) ?><br>
-                                <span><?= htmlspecialchars($event['description']) ?></span>
+                                <strong><?= htmlspecialchars($eventRow['name']) ?></strong> - <?= htmlspecialchars($eventRow['date']) ?><br>
+                                <span><?= htmlspecialchars($eventRow['description']) ?></span>
                             </li>
-                        <?php endforeach; ?>
+                        <?php endwhile; ?>
                     </ul>
                 <?php else: ?>
                     <p>No events found for this game.</p>
@@ -83,7 +80,6 @@ $events = isset($eventsData[$game]) ? $eventsData[$game] : [];
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 DOLA DOLA Esports. All rights reserved.</p>

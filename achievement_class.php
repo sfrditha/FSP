@@ -106,5 +106,24 @@ class Achievement {
         $stmt->execute();
         return $stmt->affected_rows;
     }
+
+    public function getAllAchievements() {
+        $sql = "SELECT achievement.idachievement, team.name AS team_name, achievement.name, achievement.date, achievement.description
+                FROM achievement
+                JOIN team ON achievement.idteam = team.idteam";
+        return $this->koneksi->query($sql);
+    }
+
+    public function searchAchievements($keyword) {
+        $keyword = "%{$keyword}%";
+        $sql = "SELECT achievement.idachievement, team.name AS team_name, achievement.name, achievement.date, achievement.description
+                FROM achievement
+                JOIN team ON achievement.idteam = team.idteam
+                WHERE achievement.name LIKE ? OR achievement.description LIKE ?";
+        $stmt = $this->koneksi->prepare($sql);
+        $stmt->bind_param("ss", $keyword, $keyword);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 }
 ?>

@@ -1,6 +1,9 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3307", "root", "", "esport");
+require_once 'database.php';  
+
+$database = new Database();
+$koneksi = $database->getConnection();
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed", $koneksi->connect_errno;
@@ -19,9 +22,6 @@ $koneksi->close();
     <title>eSport Website</title>
     <link rel="stylesheet" type="text/css" href="homm.css">
     <script type="text/javascript">
-        window.onload = function() {
-            alert("Koneksi sukses.");
-        };
         function toggleDropdown() {
             var dropdown = document.getElementById("dropdown");
             dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
