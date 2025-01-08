@@ -3,7 +3,7 @@ class Database {
     private $host = "localhost:3306";
     private $username = "root";
     private $password = "";
-    private $database = "esport";
+    private $database = "fullstack";
     public $connection;
 
     public function __construct() {

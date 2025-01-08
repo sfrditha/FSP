@@ -3,15 +3,15 @@ require_once 'database.php';
 require_once 'team_class.php';
 require_once 'event_class.php';
 
-// Membuat koneksi ke database
+
 $dbConnection = new Database();
 $db = $dbConnection->getConnection();
 
-// Membuat instance class Team dan Event
+
 $team = new Team($db);
 $event = new Event($db);
 
-// Mendapatkan semua data tim dan event dari database
+
 $teams = $team->getTeamsFull();
 $events = $event->getAllEvents();
 ?>
@@ -52,7 +52,7 @@ $events = $event->getAllEvents();
             <h2>About Us</h2>
             <p>We bring you the latest updates and thrilling events from the world of esports. Join us as we explore the
                 passion, excitement, and community of gamers worldwide.</p>
-            <a href="login.php" class="join-now-btn">Join Now</a>
+            <a href="login.php" class="join-now-btn">Login</a>
         </div>
     </section>
 

@@ -23,9 +23,7 @@ $result = $achievement->getAchievements($limit, $start);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievement</title>
     <link rel="stylesheet" href="aciv.css">
-    <style>
-        /* Tambahkan CSS di sini jika diperlukan */
-    </style>
+    <style> </style>
 </head>
 <body>
     <h2>ACHIEVEMENTS</h2>

@@ -52,26 +52,26 @@ class Game {
 
     public function insertGame($name, $description) {
         $sql = "INSERT INTO game (name, description) VALUES (?, ?)";
-        $stmt = $this->db->prepare($sql); // Gunakan prepare
-        $stmt->bind_param("ss", $name, $description); // Bind parameter
-        $stmt->execute(); // Eksekusi statement
-        return $stmt->affected_rows; // Kembalikan jumlah baris yang terpengaruh
+        $stmt = $this->db->prepare($sql); 
+        $stmt->bind_param("ss", $name, $description); 
+        $stmt->execute(); 
+        return $stmt->affected_rows; 
     }
     
     public function deleteGame($idgame) {
         $sql = "DELETE FROM game WHERE idgame = ?";
-        $stmt = $this->db->prepare($sql); // Gunakan prepare
-        $stmt->bind_param("i", $idgame);  // Bind parameter
-        $stmt->execute();                // Eksekusi statement
-        return $stmt->affected_rows;     // Kembalikan jumlah baris yang terpengaruh
+        $stmt = $this->db->prepare($sql); 
+        $stmt->bind_param("i", $idgame);  
+        $stmt->execute();               
+        return $stmt->affected_rows;     
     }
     
     public function updateGame($idgame, $name, $description) {
         $sql = "UPDATE game SET name = ?, description = ? WHERE idgame = ?";
-        $stmt = $this->db->prepare($sql); // Gunakan prepare
-        $stmt->bind_param("ssi", $name, $description, $idgame); // Bind parameter
-        $stmt->execute(); // Eksekusi statement
-        return $stmt->affected_rows; // Kembalikan jumlah baris yang terpengaruh
+        $stmt = $this->db->prepare($sql); 
+        $stmt->bind_param("ssi", $name, $description, $idgame); 
+        $stmt->execute(); 
+        return $stmt->affected_rows; 
     }
 
     public function getGameByTeam($idteam) {

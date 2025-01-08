@@ -4,23 +4,20 @@ require_once 'team_class.php';
 require_once 'event_class.php';
 require_once 'game_class.php';
 
-// Membuat koneksi ke database
+
 $dbConnection = new Database();
 $db = $dbConnection->getConnection();
 
-// Membuat instance class Team dan Event
 $team = new Team($db);
 $event = new Event($db);
 $game = new Game($db);
 
-// Mendapatkan ID tim dari URL
 $teamId = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if (empty($teamId)) {
     die('Team parameter is missing.');
 }
 
-// Ambil data tim berdasarkan ID
 $getteamData = $team->getTeam($teamId);
 $teamData = $getteamData->fetch_assoc();
 if (!$teamData) {
@@ -30,7 +27,6 @@ if (!$teamData) {
 $getGame = $game->getGameByTeam($teamId);
 $games = $getGame->fetch_assoc();
 
-// Ambil data anggota tim, prestasi, dan acara
 $members = $team->displayMembers($teamId);
 // $members = $getmembers->fetch_assoc();
 $achievements = $team->displayAchievements($teamId);

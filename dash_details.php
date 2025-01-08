@@ -4,11 +4,11 @@ require_once 'team_class.php';
 require_once 'event_class.php';
 require_once 'game_class.php';
 
-// Membuat koneksi ke database
+
 $dbConnection = new Database();
 $db = $dbConnection->getConnection();
 
-// Membuat instance Team dan Event
+
 $team = new Team($db);
 $event = new Event($db);
 $game = new Game($db);
@@ -20,16 +20,16 @@ if (empty($id_game)) {
     die('Game parameter is missing.');
 }
 
-// Ambil game berdasarkan id_game
+
 $games1 = $game->getGame($id_game);
 $games =  $games1->fetch_assoc();
 
-// Validasi jika game tidak ditemukan
+
 if (!$games) {
     die('Game not found.');
 }
 
-// Ambil tim dan event berdasarkan id_game
+
 $teams = $team->getTeamsByGame($id_game);
 $events = $event->getEventsByGame($id_game);
 ?>

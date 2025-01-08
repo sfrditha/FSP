@@ -1,6 +1,8 @@
 <?php
 session_start();
-$koneksi = new mysqli("localhost:3306", "root", "", "esport");
+
+$database = new Database();
+$koneksi = $database->getConnection();
 
 if ($koneksi->connect_errno) {
     echo "Koneksi ke Database Failed", $koneksi->connect_errno;
